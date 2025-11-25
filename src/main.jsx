@@ -2,18 +2,18 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import CartProvider from "./ContextAPI/CartProvider";
-import ProductProvider from "./ContextAPI/ProductProvider";
-import UserProvider from "./ContextAPI/UserProvider";
+import CartProvider from "./Context Provider/CartProvider.jsx";
+import ProductProvider from "./Context Provider/ProductProvider.jsx";
+import UserProvider from "./Context Provider/UserProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ProductProvider>
-      <UserProvider>
-        <CartProvider>
+    <UserProvider>
+      <CartProvider>
+        <ProductProvider>
           <App />
-        </CartProvider>
-      </UserProvider>
-    </ProductProvider>
+        </ProductProvider>
+      </CartProvider>
+    </UserProvider>
   </StrictMode>
 );
