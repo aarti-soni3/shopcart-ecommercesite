@@ -9,7 +9,7 @@ function ProductProvider({ children }) {
     return products.find((product) => String(product.id) === String(id));
   };
 
-  const getProductsByCategory = () => {
+  const getCategoryListWithProducts = () => {
     return products.reduce((accummulator, currentProduct) => {
       const categoryName = currentProduct.category;
 
@@ -27,7 +27,9 @@ function ProductProvider({ children }) {
     }, {});
   };
 
-  console.log(Object.values(getProductsByCategory()));
+  const getProductsByCategory = (category) => {
+    return products.filter((product) => product.category === category);
+  };
 
   return (
     <ProductContext.Provider
@@ -36,6 +38,7 @@ function ProductProvider({ children }) {
         loading,
         error,
         getProductByID,
+        getCategoryListWithProducts,
         getProductsByCategory,
       }}
     >

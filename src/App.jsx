@@ -6,6 +6,7 @@ import Products from "./Product/Products";
 import ProductCardDetail from "./Product/ProductCardDetail";
 import About from "./UI/About";
 import Contact from "./UI/Contact";
+import CategoryList from "./Product/CategoryList";
 import ProductByCategory from "./Product/ProductByCategory";
 
 function App() {
@@ -15,9 +16,13 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/" element={<ProductByCategory />} />
+            <Route path="/" element={<CategoryList />} />
             <Route path="/product" element={<Products />} />
             <Route path="/product/:id" element={<ProductCardDetail />} />
+            <Route
+              path="/product/category/:category"
+              element={<ProductByCategory />}
+            />
             <Route path="/about" element={<About />} />
             <Route path="/Contact" element={<Contact />} />
           </Routes>

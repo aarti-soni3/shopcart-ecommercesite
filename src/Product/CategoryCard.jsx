@@ -8,7 +8,7 @@ function CategoryCard({ category }) {
   return (
     <>
       <Grid key={category.name} size={3}>
-        <Link key={category.name} to={`/products/category/${category}`}>
+        <Link key={category.name} to={`/product/category/${category.name}`}>
           <Card sx={{ display: "flex" }}>
             <CardMedia
               component="img"
@@ -30,7 +30,7 @@ function CategoryCard({ category }) {
                   component="div"
                   sx={{ color: "text.secondary" }}
                 >
-                  {"1233" + " Items Available"}
+                  {category?.products?.length + " Items Available"}
                 </Typography>
               </CardContent>
             </Box>

@@ -71,7 +71,7 @@ function Navbar() {
                   width: 40,
                 }}
                 alt="Logo"
-                src="public/shopcart logo.png"
+                src="/shopcart logo.png"
               />
               <Typography variant="h5" fontSize={30} color="orange">
                 ShopCart
