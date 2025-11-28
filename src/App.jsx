@@ -8,6 +8,7 @@ import About from "./UI/About";
 import Contact from "./UI/Contact";
 import CategoryList from "./Product/CategoryList";
 import ProductByCategory from "./Product/ProductByCategory";
+import FilterProductProvider from "./Context Provider/FilterProductProvider";
 
 function App() {
   return (
@@ -17,7 +18,17 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<CategoryList />} />
-            <Route path="/product" element={<Products />} />
+
+            <Route
+              path="/product"
+              element={
+                <>
+                  <FilterProductProvider>
+                    <Products />
+                  </FilterProductProvider>
+                </>
+              }
+            />
             <Route path="/product/:id" element={<ProductCardDetail />} />
             <Route
               path="/product/category/:category"

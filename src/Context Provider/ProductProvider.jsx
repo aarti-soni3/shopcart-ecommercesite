@@ -1,4 +1,5 @@
 import { useProductData } from "../Hooks/useProductData";
+import { replaceHypensToWhiteSpace } from "../utils/string";
 import { ProductContext } from "./CreateContext";
 
 function ProductProvider({ children }) {
@@ -18,11 +19,25 @@ function ProductProvider({ children }) {
       if (!accummulator[categoryName]) {
         accummulator[categoryName] = {
           name: categoryName,
-          image: currentProduct?.images?.[0],
+          image: currentProduct?.thumbnail,
           products: [],
         };
       }
       accummulator[categoryName].products.push(currentProduct);
+      return accummulator;
+    }, {});
+  };
+
+  const getCategoryListWithFormattedText = () => {
+    return products.reduce((accummulator, product) => {
+      const category = product.category;
+
+      if (!accummulator[category]) {
+        accummulator[category] = {
+          name: category,
+          formattedCategoryText: replaceHypensToWhiteSpace(category),
+        };
+      }
       return accummulator;
     }, {});
   };
@@ -40,6 +55,7 @@ function ProductProvider({ children }) {
         getProductByID,
         getCategoryListWithProducts,
         getProductsByCategory,
+        getCategoryListWithFormattedText,
       }}
     >
       {children}

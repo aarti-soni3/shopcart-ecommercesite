@@ -2,7 +2,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { TrimSentence } from "../utils/string";
+import { trimSentence } from "../utils/string";
 import { Rating, Stack } from "@mui/material";
 import { discountPriceFromPercentage } from "../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -20,9 +20,10 @@ function ProductCard({ product }) {
           component="img"
           alt="product image"
           height="190"
-          image={product?.images[0]}
+          image={product?.thumbnail}
           sx={{ objectFit: "contain", backgroundColor: "#e8e8e8ff" }}
         />
+        
         <CardContent
           sx={{
             display: "flex",
@@ -42,7 +43,7 @@ function ProductCard({ product }) {
             fontSize={13}
             component="div"
           >
-            {TrimSentence(product?.title)}
+            {trimSentence(product?.title)}
           </Typography>
           <Stack direction={"row"} gap={1}>
             <Rating
