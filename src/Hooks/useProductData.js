@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import {
-  fetchProductsFromFirebase,
-  saveProductsToFirebase,
-} from "../services/firebaseService";
+import { useFirebaseService } from "../Firebase/useFirebaseService";
 import { fetchProductsFromAPI } from "../services/apiService";
 
 export const useProductData = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+    const { fetchProductsFromFirebase, saveProductsToFirebase } = useFirebaseService();
+  
 
   useEffect(() => {
     const loadProducts = async () => {

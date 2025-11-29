@@ -6,14 +6,13 @@ function FilterProductSection() {
   const {
     getCategoryListWithFormattedText,
     filterState,
-    // filteredProducts,
     updateCategory,
     updateSortOrder,
   } = useContext(FilterProductContext);
 
   return (
     <>
-      <Stack gap={2}>
+      <Stack gap={2} direction={"row-reverse"}>
         <Box>
           <Select
             labelId="price-filter-label"
@@ -36,7 +35,10 @@ function FilterProductSection() {
             size="medium"
             onChange={(event) => updateCategory(event.target.value)}
           >
-            <MenuItem key="All" value="All" > All </MenuItem>
+            <MenuItem key="All" value="All">
+              {" "}
+              All Categories
+            </MenuItem>
             {Object.values(getCategoryListWithFormattedText()).map(
               (category) => (
                 <MenuItem key={category.name} value={category.name}>

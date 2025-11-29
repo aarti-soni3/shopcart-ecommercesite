@@ -13,7 +13,7 @@ export const fetchCartsFromAPI = async () => {
   return response.data.carts;
 };
 
-const USER_URL = "https://dummyjson.com/users?limit=208&skip=0";
+const USER_URL = "https://dummyjson.com/users?limit=10";
 
 export const fetchUsersFromAPI = async () => {
   const response = await axios.get(USER_URL);

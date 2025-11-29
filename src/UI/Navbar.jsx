@@ -1,21 +1,18 @@
 import {
   alpha,
   AppBar,
+  Badge,
   Box,
+  IconButton,
   InputBase,
   ListItem,
   Stack,
   Typography,
 } from "@mui/material";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import styled from "@emotion/styled";
-import About from "./About";
-import Contact from "./Contact";
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import Products from "../Product/Products";
-import ProductCardDetail from "../Product/ProductCardDetail";
+import { NavLink } from "react-router-dom";
+import UserProfile from "./UserProfile";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -104,7 +101,7 @@ function Navbar() {
           </Stack>
 
           <Stack direction={"row"}>
-            <ListItem>
+            {/* <ListItem>
               <Search>
                 <SearchIconWrapper>
                   <SearchOutlinedIcon />
@@ -114,16 +111,17 @@ function Navbar() {
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
+            </ListItem> */}
+            <ListItem>
+                  <UserProfile />
             </ListItem>
             <ListItem>
-              <PersonOutlineOutlinedIcon
-                onClick={() => {
-                  console.log("123");
-                }}
-              />
-            </ListItem>
-            <ListItem>
-              <ShoppingCartOutlinedIcon />
+              <IconButton>
+                <Badge badgeContent={4} color="primary">
+                  <ShoppingCartOutlinedIcon fontSize="small" />
+                </Badge>
+              </IconButton>
+              {/* <ShoppingCartOutlinedIcon /> */}
             </ListItem>
           </Stack>
         </Stack>
