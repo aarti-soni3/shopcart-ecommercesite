@@ -1,21 +1,19 @@
 import { get, ref, set } from "firebase/database";
-import { FirebaseContext } from "../Context Provider/CreateContext";
-import { useContext } from "react";
+import { useCallback } from "react";
+import { database } from "./firebaseConfig";
 
 export const useFirebaseService = () => {
-  const { database } = useContext(FirebaseContext);
-
   // #region Product
   const PRODUCT_PATH = "products";
 
-  const getProductRef = () => {
+  const getProductRef = useCallback(() => {
     return ref(database, PRODUCT_PATH);
-  };
+  }, [database]);
 
-  const fetchProductsFromFirebase = async () => {
+  const fetchProductsFromFirebase = useCallback(async () => {
     const snapshot = await get(getProductRef());
     return snapshot.exists() ? snapshot.val() : null;
-  };
+  }, [getProductRef]);
 
   const saveProductsToFirebase = async (products) => {
     await set(getProductRef(), products);
@@ -27,14 +25,14 @@ export const useFirebaseService = () => {
 
   const CART_PATH = "carts";
 
-  const getCartRef = () => {
+  const getCartRef = useCallback(() => {
     return ref(database, CART_PATH);
-  };
+  }, [database]);
 
-  const fetchCartsFromfirebase = async () => {
+  const fetchCartsFromfirebase = useCallback(async () => {
     const snapshot = await get(getCartRef());
     return snapshot.exists() ? snapshot.val() : null;
-  };
+  }, [getCartRef]);
 
   const saveCartsToFirebase = async (carts) => {
     await set(getCartRef(), carts);
@@ -42,30 +40,10 @@ export const useFirebaseService = () => {
 
   // #endregion
 
-  // #region User
-
-  const USER_PATH = "users";
-
-  const getUserRef = () => {
-    return ref(database, USER_PATH);
-  };
-
-  const fetchUsersFromfirebase = async () => {
-    const snapshot = await get(getUserRef());
-    return snapshot.exists() ? snapshot.val() : null;
-  };
-
-  const saveUsersToFirebase = async (carts) => {
-    await set(getUserRef(), carts);
-  };
-
   return {
     fetchProductsFromFirebase,
     fetchCartsFromfirebase,
-    fetchUsersFromfirebase,
     saveProductsToFirebase,
     saveCartsToFirebase,
-    saveUsersToFirebase,
   };
 };
-// #endregion

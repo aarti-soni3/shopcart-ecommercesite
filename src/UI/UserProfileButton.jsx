@@ -1,6 +1,3 @@
-import { useContext, useState } from "react";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import {
   Avatar,
   Box,
@@ -9,12 +6,14 @@ import {
   Menu,
   MenuItem,
   Tooltip,
-  Typography,
 } from "@mui/material";
-import { FirebaseContext } from "../Context Provider/CreateContext";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Context Provider/CreateContext";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 export default function AccountMenu() {
-  const { signOutUser } = useContext(FirebaseContext);
+  const { signOutUser } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

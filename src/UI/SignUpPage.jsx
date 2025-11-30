@@ -1,23 +1,23 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
-import { FirebaseContext } from "../Context Provider/CreateContext";
+import { AuthContext } from "../Context Provider/CreateContext";
 
 function SignUpPage() {
   const initialData = {
     firstName: "",
     lastName: "",
+    phone: "",
     email: "",
     password: "",
-    birthdate: "",
-    age: "",
   };
 
   const [formData, setFormData] = useState(initialData);
 
-  const { LoginUserWithEmailAndPassword } = useContext(FirebaseContext);
+  const { SignupUserWithEmailAndPassword, signUpData } =
+    useContext(AuthContext);
 
   const handleOnSubmit = () => {
-    LoginUserWithEmailAndPassword(formData?.email, formData?.password);
+    SignupUserWithEmailAndPassword(formData);
   };
 
   const handleOnValueChange = (event) => {
@@ -31,7 +31,6 @@ function SignUpPage() {
   };
   return (
     <>
-      {/* <form onSubmit={handleOnSubmit}> */}
       <Typography variant="h4"> Signup Page</Typography>
       <br />
 
@@ -41,7 +40,6 @@ function SignUpPage() {
         name="firstName"
         value={formData.firstName}
         onChange={handleOnValueChange}
-        required
       ></TextField>
       <br />
       <br />
@@ -52,29 +50,16 @@ function SignUpPage() {
         name="lastName"
         value={formData.lastName}
         onChange={handleOnValueChange}
-        required
       ></TextField>
       <br />
       <br />
 
       <TextField
         type="number"
-        label="Age"
-        name="age"
-        value={formData.age}
+        label="Phone"
+        name="phone"
+        value={formData.phone}
         onChange={handleOnValueChange}
-        required
-      ></TextField>
-      <br />
-      <br />
-
-      <TextField
-        type="date"
-        label="Birth Date"
-        name="birthdate"
-        value={formData.birthdate}
-        onChange={handleOnValueChange}
-        required
       ></TextField>
       <br />
       <br />
@@ -101,10 +86,27 @@ function SignUpPage() {
       <br />
       <br />
 
-      <Button type="submit" onClick={handleOnSubmit}>
-        Submit
+      <Button
+        type="submit"
+        onClick={handleOnSubmit}
+        disabled={signUpData.isSignupLoading}
+      >
+        Sign Up
       </Button>
-      {/* </form> */}
+
+      {signUpData.isSignUpError && (
+        <Box
+          sx={{
+            color: "white",
+            backgroundColor: "gray",
+            padding: "10px",
+            borderRadius: "5px",
+          }}
+        >
+          <Typography fontWeight={600}>Sign Up Failed:</Typography>
+          <Typography>{signUpData.signUpErrorMessage}</Typography>
+        </Box>
+      )}
     </>
   );
 }

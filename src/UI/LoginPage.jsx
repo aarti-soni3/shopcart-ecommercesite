@@ -1,9 +1,10 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
-import { FirebaseContext } from "../Context Provider/CreateContext";
+import { AuthContext } from "../Context Provider/CreateContext";
+import { NavLink } from "react-router-dom";
 
 function LoginPage() {
-  const { LoginUserWithEmailAndPassword } = useContext(FirebaseContext);
+  const { LoginUserWithEmailAndPassword, loginData } = useContext(AuthContext);
 
   const initialData = {
     email: "",
@@ -26,9 +27,6 @@ function LoginPage() {
   };
   return (
     <>
-      {console.log(formData.email)}
-      {console.log(formData.password)}
-      {/* <form onSubmit={handleOnSubmit}> */}
       <Typography variant="h4"> Login Page</Typography>
       <br />
 
@@ -54,10 +52,33 @@ function LoginPage() {
       <br />
       <br />
 
-      <Button type="submit" onClick={handleOnSubmit}>
-        Submit
+      <Button
+        type="submit"
+        onClick={handleOnSubmit}
+        disabled={loginData.isLoginLoading}
+      >
+        {loginData.isLoginLoading ? "Loggin in..." : "Login"}
       </Button>
-      {/* </form> */}
+
+      {loginData.isLoginError && (
+        <Box
+          sx={{
+            color: "white",
+            backgroundColor: "gray",
+            padding: "10px",
+            borderRadius: "5px",
+          }}
+        >
+          <Typography fontWeight={600}>Login Failed:</Typography>
+          <Typography>{loginData.loginErrorMessage}</Typography>
+        </Box>
+      )}
+      <Box>
+        New User ?{" "}
+        <NavLink to="/signup">
+          <Typography sx={{ textDecoration: "underline" }}>Sign Up</Typography>
+        </NavLink>
+      </Box>
     </>
   );
 }
