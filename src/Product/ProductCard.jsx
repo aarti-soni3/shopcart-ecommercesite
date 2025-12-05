@@ -7,9 +7,39 @@ import { Rating, Stack } from "@mui/material";
 import { discountPriceFromPercentage } from "../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { IconButton } from "@mui/material";
+import { useContext, useState } from "react";
+import { CartContext } from "../Context Provider/CreateContext";
 
 function ProductCard({ product }) {
-  const handleOnCartClick = () => {};
+  const {
+    addToCart,
+    updateProductQuantity,
+    isProductInCart,
+    // getProductQuantity,
+  } = useContext(CartContext);
+
+  const [isAdding, setIsAdding] = useState(false);
+  const inCart = isProductInCart(product.id);
+
+  const handleOnCartClick = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    try {
+      setIsAdding(true);
+
+      if (inCart) {
+        await updateProductQuantity(product.id, 1);
+      } else {
+        await addToCart(product, 1);
+      }
+    } catch (error) {
+      console.log("can't add product to cart", error);
+      throw new Error(error);
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <>
@@ -23,7 +53,7 @@ function ProductCard({ product }) {
           image={product?.thumbnail}
           sx={{ objectFit: "contain", backgroundColor: "#e8e8e8ff" }}
         />
-        
+
         <CardContent
           sx={{
             display: "flex",
@@ -90,6 +120,7 @@ function ProductCard({ product }) {
               size="large"
               color="primary"
               onClick={handleOnCartClick}
+              disabled={isAdding}
             >
               <ShoppingCartOutlinedIcon />
             </IconButton>

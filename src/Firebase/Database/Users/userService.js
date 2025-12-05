@@ -1,5 +1,4 @@
 import { get, ref, set } from "firebase/database";
-import { nanoid } from "nanoid";
 import { database } from "../../firebaseConfig";
 
 const USER_PATH = "users";
@@ -17,8 +16,9 @@ export const writeInitialUserData = async (users) => {
   await set(getUserRef(), users);
 };
 
-export const writeUserDataByID = (data) => {
-  set(ref(database, "users/" + nanoid()), {
+export const writeUserDataByUID = (uid, data) => {
+  console.log(uid, data);
+  set(ref(database, "users/" + uid), {
     firstName: data.firstName,
     lastName: data.lastName,
     phone: data.phone,

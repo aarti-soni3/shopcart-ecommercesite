@@ -1,6 +1,6 @@
-import { useProductData } from "../Hooks/useProductData";
-import { replaceHypensToWhiteSpace } from "../utils/string";
-import { ProductContext } from "./CreateContext";
+import { replaceHypensToWhiteSpace } from "../../../utils/string";
+import { ProductContext } from "../../../Context Provider/CreateContext";
+import { useProductData } from "../../../Hooks/useProductData";
 
 function ProductProvider({ children }) {
   //TODO: need to extract here...dont pass as single var to provider

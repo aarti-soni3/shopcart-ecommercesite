@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context Provider/CreateContext";
 import { auth } from "../../firebaseConfig";
+import { writeUserDataByUID } from "../Users/userService";
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -62,9 +63,9 @@ export const AuthProvider = ({ children }) => {
         password
       );
       const user = userCredential.user;
+      await writeUserDataByUID(user.uid,data);
       navigate("/");
       console.log("sign up user : ", user);
-      //   writeUserDataByID(data);
     } catch (error) {
       const errorCode = error.code;
       let errorMsg = "";
@@ -79,6 +80,8 @@ export const AuthProvider = ({ children }) => {
         errorMsg = "Email or Password does not meet minimum requirements.";
       } else if (errorCode === "auth/weak-password") {
         errorMsg = "Password must be at least 6 characters long.";
+      } else {
+        errorMsg = "something went wrong... Error Code : " + errorCode;
       }
 
       setSignUpData((prevData) => ({

@@ -25,13 +25,13 @@ export const useUserData = () => {
 
       if (firebaseData) {
         setData(firebaseData);
-        console.log("firebase data : ", firebaseData);
+        // console.log("firebase data : ", firebaseData);
       } else {
         const apiData = await fetchUsersFromAPI();
         await writeInitialUserData(apiData);
         await addAPIUsersToAuth(apiData);
         setData(apiData);
-        console.log("api data : ", apiData);
+        // console.log("api data : ", apiData);
       }
     } catch (error) {
       setError(error);

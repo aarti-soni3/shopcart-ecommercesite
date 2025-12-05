@@ -1,15 +1,17 @@
 import "./App.css";
 import Navbar from "./UI/Navbar";
-import { Route, Routes } from "react-router-dom";
-import Products from "./Product/Products";
-import ProductCardDetail from "./Product/ProductCardDetail";
 import About from "./UI/About";
 import Contact from "./UI/Contact";
-import CategoryList from "./Product/CategoryList";
-import ProductByCategory from "./Product/ProductByCategory";
-import FilterProductProvider from "./Context Provider/FilterProductProvider";
 import LoginPage from "./UI/LoginPage";
 import SignUpPage from "./UI/SignUpPage";
+import Products from "./Product/Products";
+import { Route, Routes } from "react-router-dom";
+import CategoryList from "./Product/CategoryList";
+import ProductCardDetail from "./Product/ProductCardDetail";
+import ProductByCategory from "./Product/ProductByCategory";
+import FilterProductProvider from "./Firebase/Database/Product/FilterProductProvider";
+import CartPage from "./UI/CartPage";
+import ProfilePage from "./UI/ProfilePage";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/" element={<CategoryList />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/profilepage" element={<ProfilePage />} />
 
         <Route
           path="/product"

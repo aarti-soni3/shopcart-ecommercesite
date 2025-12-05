@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { useFirebaseService } from "../Firebase/useFirebaseService";
 import { fetchProductsFromAPI } from "../services/apiService";
+import {
+  fetchProductsFromFirebase,
+  saveProductsToFirebase,
+} from "../Firebase/Database/Product/productService";
 
 export const useProductData = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-    const { fetchProductsFromFirebase, saveProductsToFirebase } = useFirebaseService();
-  
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -19,12 +19,12 @@ export const useProductData = () => {
 
         if (firebaseData) {
           setData(firebaseData);
-          console.log("firebase data : ", firebaseData);
+          // console.log("firebase data : ", firebaseData);
         } else {
           const apiData = await fetchProductsFromAPI();
           await saveProductsToFirebase(apiData);
           setData(apiData);
-          console.log("api data : ", apiData);
+          // console.log("api data : ", apiData);
         }
         setLoading(false);
       } catch (e) {

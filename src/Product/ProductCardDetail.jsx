@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { ProductContext } from "../Context Provider/CreateContext";
+import { CartContext, ProductContext } from "../Context Provider/CreateContext";
 import { discountPriceFromPercentage } from "../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
@@ -31,6 +31,32 @@ function ProductCardDetail() {
 
     fetchProduct();
   }, [id, getProductByID]);
+
+  const { addToCart, updateProductQuantity, isProductInCart } =
+    useContext(CartContext);
+
+  const [isAdding, setIsAdding] = useState(false);
+  const inCart = isProductInCart(product?.id);
+
+  const handleOnCartClick = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    try {
+      setIsAdding(true);
+
+      if (inCart) {
+        await updateProductQuantity(id, 1);
+      } else {
+        await addToCart(product, 1);
+      }
+    } catch (error) {
+      console.log("can't add product to cart", error);
+      throw new Error(error);
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   if (loading) return <>Loading...</>;
 
@@ -133,7 +159,12 @@ function ProductCardDetail() {
               >
                 <b>About the product :</b> <br /> {product?.description}
               </Typography>
-              <Button color="primary" sx={{ mt: 2, zIndex: 5 }}>
+              <Button
+                color="primary"
+                sx={{ mt: 2, zIndex: 5 }}
+                onClick={handleOnCartClick}
+                disabled={isAdding}
+              >
                 <ShoppingCartOutlinedIcon /> Add To Cart
               </Button>
             </Stack>

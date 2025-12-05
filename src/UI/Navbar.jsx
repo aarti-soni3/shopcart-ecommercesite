@@ -1,18 +1,20 @@
 import {
   alpha,
   AppBar,
-  Badge,
   Box,
-  IconButton,
   InputBase,
   ListItem,
   Stack,
+  IconButton,
+  Badge,
   Typography,
 } from "@mui/material";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import UserProfile from "./UserProfile";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useContext } from "react";
+import { CartContext } from "../Context Provider/CreateContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -55,6 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Navbar() {
+  const { getCartItemCount } = useContext(CartContext);
+
   return (
     <>
       <AppBar position="fixed" sx={{ backgroundColor: "gray", p: 1 }}>
@@ -113,15 +117,16 @@ function Navbar() {
               </Search>
             </ListItem> */}
             <ListItem>
-                  <UserProfile />
+              <UserProfile />
             </ListItem>
             <ListItem>
-              <IconButton>
-                <Badge badgeContent={4} color="primary">
-                  <ShoppingCartOutlinedIcon fontSize="small" />
-                </Badge>
-              </IconButton>
-              {/* <ShoppingCartOutlinedIcon /> */}
+              <NavLink to="/cart">
+                <IconButton>
+                  <Badge badgeContent={getCartItemCount()} color="primary">
+                    <ShoppingCartOutlinedIcon fontSize="small" />
+                  </Badge>
+                </IconButton>
+              </NavLink>
             </ListItem>
           </Stack>
         </Stack>

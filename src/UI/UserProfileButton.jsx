@@ -7,6 +7,7 @@ import {
   MenuItem,
   Tooltip,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Context Provider/CreateContext";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -80,12 +81,14 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleOnClose}>
-          <ListItemIcon>
-            <AccountCircleOutlinedIcon fontSize="small" />
-          </ListItemIcon>
-          Profile
-        </MenuItem>
+        <NavLink to="/profilepage">
+          <MenuItem onClick={handleOnClose}>
+            <ListItemIcon>
+              <AccountCircleOutlinedIcon fontSize="small" />
+            </ListItemIcon>
+            Profile
+          </MenuItem>
+        </NavLink>
         {/* <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />

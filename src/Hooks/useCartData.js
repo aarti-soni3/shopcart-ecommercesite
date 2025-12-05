@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useFirebaseService } from "../Firebase/useFirebaseService";
 import { fetchCartsFromAPI } from "../services/apiService";
+import {
+  fetchCartsFromfirebase,
+  saveCartsToFirebase,
+} from "../Firebase/Database/Cart/cartService";
 
 export const useCartData = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const { fetchCartsFromfirebase, saveCartsToFirebase } = useFirebaseService();
 
   useEffect(() => {
     const loadCarts = async () => {

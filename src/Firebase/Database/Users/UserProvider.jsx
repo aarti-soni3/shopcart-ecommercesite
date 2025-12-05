@@ -3,7 +3,6 @@ import { useUserData } from "../../../Hooks/useUserData";
 
 export const UserProvider = ({ children }) => {
   const { users, loading, error } = useUserData();
-  console.log(users, loading, error);
 
   return (
     <UserContext.Provider
