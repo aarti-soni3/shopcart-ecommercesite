@@ -148,7 +148,9 @@ export default function CartItem({ product }) {
               <IconButton
                 size="large"
                 color="primary"
-                onClick={() => {
+                onClick={(event) => {
+                  event.stopPropagation();
+                  event.preventDefault();
                   removeFromCart(product.id);
                 }}
                 sx={{ p: 0 }}

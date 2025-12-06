@@ -81,7 +81,7 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <NavLink to="/profilepage">
+        <NavLink to="/profile">
           <MenuItem onClick={handleOnClose}>
             <ListItemIcon>
               <AccountCircleOutlinedIcon fontSize="small" />

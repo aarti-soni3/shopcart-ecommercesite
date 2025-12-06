@@ -12,6 +12,7 @@ import ProductByCategory from "./Product/ProductByCategory";
 import FilterProductProvider from "./Firebase/Database/Product/FilterProductProvider";
 import CartPage from "./UI/CartPage";
 import ProfilePage from "./UI/ProfilePage";
+import PlaceOrderPage from "./UI/PlaceOrderPage";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/profilepage" element={<ProfilePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/placeorder" element={<PlaceOrderPage />} />
 
         <Route
           path="/product"

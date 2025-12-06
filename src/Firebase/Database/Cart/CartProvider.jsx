@@ -33,7 +33,7 @@ function CartProvider({ children }) {
       const cartRef = ref(database, "carts/" + userID);
       const unsubscribe = onValue(
         cartRef,
-        async (snapshot) => {
+        (snapshot) => {
           const data = snapshot.val();
           console.log(data);
           setCart(data);

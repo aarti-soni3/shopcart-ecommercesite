@@ -4,17 +4,13 @@ import {
   List,
   ListItem,
   Typography,
-  // Button,
-  // IconButton,
-  // ListItemButton,
-  // ListItemIcon,
-  // ListItemText,
+  Button,
 } from "@mui/material";
 import CartItem from "./CartItem";
 import { useContext } from "react";
 import { AuthContext, CartContext } from "../Context Provider/CreateContext";
-import CartTotalPage from "./CartTotalPage";
 import { NavLink } from "react-router-dom";
+import CartSummary from "./CartSummary";
 
 export default function CartPage() {
   const { cart, loading, error, clearUserCart } = useContext(CartContext);
@@ -67,8 +63,14 @@ export default function CartPage() {
 
       <br />
       <br />
+      <CartSummary discountedTotal={cart.discountedTotal} />
 
-      <CartTotalPage discountedTotal={cart.discountedTotal} />
+      <br />
+      <NavLink to="/placeorder">
+        <Button variant="contained" sx={{ width: 370 }}>
+          Checkout
+        </Button>
+      </NavLink>
     </>
   );
 }
