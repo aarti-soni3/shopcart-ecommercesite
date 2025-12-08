@@ -79,6 +79,7 @@ export const getProcessedOrderData = (userID, cartData, orderData) => {
       totalProducts: cartData.totalProducts,
       totalQuantity: cartData.totalQuantity,
     },
+    paymentId: orderData.paymentId || "",
     paymentMethod: orderData.paymentMethod,
     orderStatus: "pending",
     createdAt: new Date().toISOString(),

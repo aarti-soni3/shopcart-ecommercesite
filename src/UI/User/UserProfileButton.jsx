@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
-import { AuthContext } from "../Context Provider/CreateContext";
+import { AuthContext } from "../../Context Provider/CreateContext";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 
 export default function AccountMenu() {
   const { signOutUser } = useContext(AuthContext);
@@ -81,6 +82,14 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        <NavLink to="/orderhistory">
+          <MenuItem onClick={handleOnClose}>
+            <ListItemIcon>
+              <ShoppingBagIcon fontSize="small" />
+            </ListItemIcon>
+            Order History
+          </MenuItem>
+        </NavLink>
         <NavLink to="/profile">
           <MenuItem onClick={handleOnClose}>
             <ListItemIcon>

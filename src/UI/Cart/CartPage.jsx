@@ -6,11 +6,11 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import CartItem from "./CartItem";
 import { useContext } from "react";
-import { AuthContext, CartContext } from "../Context Provider/CreateContext";
 import { NavLink } from "react-router-dom";
 import CartSummary from "./CartSummary";
+import CartItem from "./CartItem";
+import { CartContext } from "../../Context Provider/CreateContext";
 
 export default function CartPage() {
   const { cart, loading, error, clearUserCart } = useContext(CartContext);

@@ -1,9 +1,9 @@
 import { Box, Button, List, ListItem, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { twoDecimalValue } from "../utils/math";
+import { twoDecimalValue } from "../../utils/math";
 
 export default function CartSummary({ discountedTotal }) {
-  const shippingFees = discountedTotal > 1000 ? 0 : 50;
+  // const shippingFee = discountedTotal > 1000 ? 0 : 50;
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function CartSummary({ discountedTotal }) {
             </Typography>
           </Box>
         </ListItem>
-        <ListItem>
+        {/* <ListItem>
           <Box
             display={"flex"}
             flexDirection={"row"}
@@ -38,7 +38,7 @@ export default function CartSummary({ discountedTotal }) {
               &#8377; {twoDecimalValue(shippingFees)}
             </Typography>
           </Box>
-        </ListItem>
+        </ListItem> */}
         <ListItem>
           <Box
             display={"flex"}
@@ -50,7 +50,7 @@ export default function CartSummary({ discountedTotal }) {
               Grand Total :{" "}
             </Typography>
             <Typography variant="subtitle1">
-              &#8377; {twoDecimalValue(discountedTotal + shippingFees)}
+              &#8377; {twoDecimalValue(discountedTotal)}
             </Typography>
           </Box>
         </ListItem>

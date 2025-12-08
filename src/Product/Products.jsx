@@ -4,9 +4,9 @@ import {
   ProductContext,
 } from "../Context Provider/CreateContext";
 import ProductCard from "./ProductCard";
-import ProductItemGrid from "../UI/ProductItemGrid";
+import ProductItemGrid from "./ProductItemGrid";
 import { Stack } from "@mui/material";
-import FilterProductSection from "../UI/FilterProductSection";
+import FilterProductSection from "./FilterProductSection";
 
 function Products() {
   const { loading, error } = useContext(ProductContext);

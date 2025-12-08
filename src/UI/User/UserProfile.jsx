@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../Context Provider/CreateContext";
+import { AuthContext } from "../../Context Provider/CreateContext";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { IconButton } from "@mui/material";
 import UserProfileButton from "./UserProfileButton";

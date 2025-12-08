@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { ProductContext } from "../Context Provider/CreateContext";
 import { useContext } from "react";
-import ProductItemGrid from "../UI/ProductItemGrid";
+import ProductItemGrid from "./ProductItemGrid";
 import ProductCard from "./ProductCard";
 
 function ProductByCategory() {

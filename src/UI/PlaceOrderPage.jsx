@@ -12,12 +12,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext, useState } from "react";
-import CartSummary from "./CartSummary";
+import CartSummary from "./Cart/CartSummary";
 import { CartContext, OrderContext } from "../Context Provider/CreateContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formValidationSchema } from "../utils/validationSchema";
 import { useNavigate } from "react-router-dom";
+import RazorpayButton from "./RazorpayButton";
 
 export default function PlaceOrderPage() {
   const { cart, loading, error, clearUserCart } = useContext(CartContext);
@@ -42,16 +43,21 @@ export default function PlaceOrderPage() {
     control,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    getValues,
+    watch,
+    formState: { errors, isSubmitting, isSubmitSuccessful, isValid },
   } = useForm({
     resolver: yupResolver(formValidationSchema),
     defaultValues: initialData,
+    mode: "onBlur",
   });
 
-  const navigate = useNavigate("/");
+  const selectedPaymentMethod = watch("paymentMethod");
+  console.log(selectedPaymentMethod);
 
   const onSubmit = async (orderData) => {
     try {
+      console.log(orderData);
       setSubmitError(null);
       await createOrder(orderData);
       await clearUserCart();
@@ -63,6 +69,32 @@ export default function PlaceOrderPage() {
       console.log(error.message || "Failed to place order. Please try again.");
       throw error;
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handlePaymentSuccess = async (paymentDetails) => {
+    const paymentId = paymentDetails.paymentId;
+
+    const orderData = getValues();
+    const finalorderData = {
+      ...orderData,
+      paymentId: paymentId,
+    };
+    console.log(finalorderData);
+
+    try {
+      await onSubmit(finalorderData);
+      navigate("/ordersuccess");
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+  const handlePaymentError = (errorData) => {
+    console.log(errorData.error);
+    navigate("/orderfailed");
   };
 
   if (loading) {
@@ -245,9 +277,9 @@ export default function PlaceOrderPage() {
                     <RadioGroup {...field} row>
                       <FormControlLabel
                         // name="stripe"
-                        value="Stripe"
+                        value="Razorpay"
                         control={<Radio />}
-                        label="Stripe"
+                        label="Razorpay"
                       />
                       <FormControlLabel
                         // name="cod"
@@ -267,14 +299,30 @@ export default function PlaceOrderPage() {
               </FormControl>
               <br />
               <br />
-              <Button
-                type="submit"
-                variant="contained"
-                //   onClick={handleOnSubmit}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Placing Order" : "Place Order"}
-              </Button>
+              {selectedPaymentMethod === "COD" && (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  //   onClick={handleOnSubmit}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Placing Order" : "Place Order"}
+                </Button>
+              )}
+
+              {selectedPaymentMethod === "Razorpay" && (
+                <RazorpayButton
+                  amount={cart.discountedTotal}
+                  userDetails={{
+                    name: getValues("fullName"),
+                    email: getValues("email"),
+                    phone: getValues("phone"),
+                  }}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                  disabled={isSubmitting || !isValid}
+                />
+              )}
             </Box>
           </Stack>
         </Stack>

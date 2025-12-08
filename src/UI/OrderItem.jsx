@@ -1,44 +1,16 @@
+import { twoDecimalValue } from "../utils/math";
+import { trimSentence } from "../utils/string";
 import Card from "@mui/material/Card";
-import { Avatar, Box, Chip, IconButton } from "@mui/material";
-import { Rating, Stack } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
+import { Stack } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { trimSentence } from "../utils/string";
 import CardContent from "@mui/material/CardContent";
-import { twoDecimalValue } from "../utils/math";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { useContext, useState } from "react";
-import { CartContext } from "../Context Provider/CreateContext";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
-export default function CartItem({ product }) {
-  const { removeFromCart, updateProductQuantity } = useContext(CartContext);
-  const [isAdding, setIsAdding] = useState(false);
-
-  const handleOnAddButtonClick = async () => {
-    try {
-      setIsAdding(true);
-      await updateProductQuantity(product.id, 1);
-    } catch (error) {
-      throw new Error(error);
-    } finally {
-      setIsAdding(false);
-    }
-  };
-
-  const handleOnRemoveButtonClick = async () => {
-    try {
-      setIsAdding(true);
-      await updateProductQuantity(product.id, -1);
-    } catch (error) {
-      throw new Error(error);
-    } finally {
-      setIsAdding(false);
-    }
-  };
-
+export default function OrderItem({ product }) {
   return (
     <>
       <Card
@@ -71,7 +43,6 @@ export default function CartItem({ product }) {
         <CardMedia
           component="img"
           alt="product image"
-          //   image={"/shopcart logo.png"}
           image={product?.thumbnail}
           sx={{
             width: 220,
@@ -95,10 +66,6 @@ export default function CartItem({ product }) {
                 {trimSentence(product?.title, 30)}
               </Typography>
 
-              <Typography variant="subtitle1" sx={{ color: "text.secondary" }}>
-                {product?.brand}
-              </Typography>
-
               <Stack direction={"row"} gap={2}>
                 <Typography
                   gutterBottom
@@ -119,44 +86,31 @@ export default function CartItem({ product }) {
                   &#8722;{product?.discountPercentage}&#37;
                 </Typography>
               </Stack>
-
-              <Stack direction={"row"} gap={2} justifyContent={"space-between"}>
-                <IconButton
-                  sx={{ border: 1 }}
-                  onClick={handleOnRemoveButtonClick}
-                  disabled={isAdding}
+              <Stack direction={'row'}>
+                <Typography
+                  gutterBottom
+                  fontSize={13}
+                  fontWeight={600}
+                  variant="h6"
+                  component="div"
                 >
-                  <RemoveOutlinedIcon color="primary" />
-                </IconButton>
-                <Typography fontSize={19} variant="h6" component="div">
-                  {product.quantity}
+                  Quantity :
                 </Typography>
-                <IconButton
-                  sx={{ border: 1 }}
-                  onClick={handleOnAddButtonClick}
-                  disabled={isAdding}
+                <Typography
+                  gutterBottom
+                  fontSize={13}
+                  variant="h6"
+                  component="div"
                 >
-                  <AddOutlinedIcon color="primary" />
-                </IconButton>
+                  {product?.quantity}
+                </Typography>
               </Stack>
             </Stack>
             <Stack sx={{ minWidth: 100, textAlign: "right" }}>
               <Typography fontSize={19} variant="h6" component="div">
-                &#36; {twoDecimalValue(product.discountedTotal)}
+                &#36;
+                {twoDecimalValue(product.discountedTotal)}
               </Typography>
-
-              <IconButton
-                size="large"
-                color="primary"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  removeFromCart(product.id);
-                }}
-                sx={{ p: 0 }}
-              >
-                <DeleteOutlineOutlinedIcon sx={{ m: 0 }} />
-              </IconButton>
             </Stack>
           </CardContent>
         </Box>

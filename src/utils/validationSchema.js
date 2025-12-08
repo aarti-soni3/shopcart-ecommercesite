@@ -27,6 +27,6 @@ export const formValidationSchema = yup
     paymentMethod: yup
       .string()
       .required("Please select a payment method")
-      .oneOf(["Stripe", "COD"], "Invalid payment method"),
+      .oneOf(["Razorpay", "COD"], "Invalid payment method"),
   })
   .required();

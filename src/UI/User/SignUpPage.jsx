@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
-import { AuthContext } from "../Context Provider/CreateContext";
+import { AuthContext } from "../../Context Provider/CreateContext";
 
 function SignUpPage() {
   const initialData = {

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import UserProfile from "./UserProfile";
+import UserProfile from "./User/UserProfile";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useContext } from "react";
 import { CartContext } from "../Context Provider/CreateContext";
