@@ -30,9 +30,9 @@ function FilterProductProvider({ children }) {
       );
 
     if (filterState?.sortOrder === "LTH")
-      result = result.sort((a, b) => a.price - b.price);
+      return [...result].sort((a, b) => a.price - b.price);
     else if (filterState?.sortOrder === "HTL")
-      return result.sort((a, b) => b.price - a.price);
+      return [...result].sort((a, b) => b.price - a.price);
 
     return result;
   }, [filterState, products]);

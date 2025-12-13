@@ -7,7 +7,7 @@ import { Rating, Stack } from "@mui/material";
 import { discountPriceFromPercentage } from "../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { IconButton } from "@mui/material";
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import { CartContext } from "../Context Provider/CreateContext";
 
 function ProductCard({ product }) {
@@ -131,4 +131,4 @@ function ProductCard({ product }) {
   );
 }
 
-export default ProductCard;
+export default memo(ProductCard);

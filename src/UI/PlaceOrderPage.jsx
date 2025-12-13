@@ -11,7 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import CartSummary from "./Cart/CartSummary";
 import { CartContext, OrderContext } from "../Context Provider/CreateContext";
 import { useForm, Controller } from "react-hook-form";
@@ -52,26 +52,38 @@ export default function PlaceOrderPage() {
     mode: "onBlur",
   });
 
+  const navigate = useNavigate();
   const selectedPaymentMethod = watch("paymentMethod");
   console.log(selectedPaymentMethod);
 
+  const processOrder = useCallback(
+    async (orderData) => {
+      try {
+        setSubmitError(null);
+        await createOrder(orderData);
+        await clearUserCart();
+        await reset();
+      } catch (error) {
+        setSubmitError(error);
+        console.log(
+          error.message || "Failed to place order. Please try again."
+        );
+      }
+    },
+    [createOrder, clearUserCart, reset]
+  );
+
   const onSubmit = async (orderData) => {
     try {
-      console.log(orderData);
-      setSubmitError(null);
-      await createOrder(orderData);
-      await clearUserCart();
-      await reset();
-      navigate("/");
+      await processOrder(orderData);
+      navigate("/ordersuccess");
     } catch (error) {
       setSubmitError(error);
-      //  console.error("Error placing order:", error);
-      console.log(error.message || "Failed to place order. Please try again.");
+      console.log("COD Submission Failed", error);
+      navigate("/orderfailed");
       throw error;
     }
   };
-
-  const navigate = useNavigate();
 
   const handlePaymentSuccess = async (paymentDetails) => {
     const paymentId = paymentDetails.paymentId;
@@ -84,16 +96,18 @@ export default function PlaceOrderPage() {
     console.log(finalorderData);
 
     try {
-      await onSubmit(finalorderData);
+      await processOrder(finalorderData);
       navigate("/ordersuccess");
     } catch (error) {
-      console.log(error);
+      console.log("Razor Pay Payment Failed", error);
+      navigate("/orderfailed");
       throw error;
     }
   };
 
   const handlePaymentError = (errorData) => {
     console.log(errorData.error);
+    setSubmitError("Payment Failed, Try again...");
     navigate("/orderfailed");
   };
 

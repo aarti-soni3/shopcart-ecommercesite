@@ -25,6 +25,7 @@ function LoginPage() {
       [name]: value,
     }));
   };
+
   return (
     <>
       <Typography variant="h4"> Login Page</Typography>
@@ -73,12 +74,14 @@ function LoginPage() {
           <Typography>{loginData.loginErrorMessage}</Typography>
         </Box>
       )}
-      <Box>
-        New User ?{" "}
-        <NavLink to="/signup">
-          <Typography sx={{ textDecoration: "underline" }}>Sign Up</Typography>
-        </NavLink>
-      </Box>
+        <Box>
+          New User ?{" "}
+          <NavLink to="/signup">
+            <Typography sx={{ textDecoration: "underline" }}>
+              Sign Up
+            </Typography>
+          </NavLink>
+        </Box>
     </>
   );
 }

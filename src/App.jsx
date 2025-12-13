@@ -16,6 +16,7 @@ import ProfilePage from "./UI/User/ProfilePage";
 import OrderSuccessPage from "./UI/OrderSuccessPage";
 import OrderFailedPage from "./UI/OrderFailedPage";
 import OrderHistoryPage from "./UI/OrderHistoryPage";
+import PageNotFound from "./UI/PageNotFound";
 
 function App() {
   return (
@@ -31,7 +32,9 @@ function App() {
         <Route path="/ordersuccess" element={<OrderSuccessPage />} />
         <Route path="/orderfailed" element={<OrderFailedPage />} />
         <Route path="/orderhistory" element={<OrderHistoryPage />} />
-
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/product/:id" element={<ProductCardDetail />} />
         <Route
           path="/product"
           element={
@@ -40,13 +43,12 @@ function App() {
             </FilterProductProvider>
           }
         />
-        <Route path="/product/:id" element={<ProductCardDetail />} />
         <Route
           path="/product/category/:category"
           element={<ProductByCategory />}
         />
-        <Route path="/about" element={<About />} />
-        <Route path="/Contact" element={<Contact />} />
+
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

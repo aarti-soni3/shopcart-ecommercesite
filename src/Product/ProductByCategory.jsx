@@ -3,6 +3,7 @@ import { ProductContext } from "../Context Provider/CreateContext";
 import { useContext } from "react";
 import ProductItemGrid from "./ProductItemGrid";
 import ProductCard from "./ProductCard";
+import { Box } from "@mui/material";
 
 function ProductByCategory() {
   const { category } = useParams();
@@ -21,13 +22,13 @@ function ProductByCategory() {
   };
 
   return (
-    <>
+    <Box sx={{ display: "flex", width: "100%", height: "100vh", p: 2 }}>
       <ProductItemGrid
         products={getProductsByCategory(category)}
         renderCard={renderCard}
         getLinkPath={getLinkPath}
       />
-    </>
+    </Box>
   );
 }
 

@@ -1,8 +1,9 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context Provider/CreateContext";
+import { debounceFunction } from "../../utils/debounceFunction";
 
-function SignUpPage() {
+export default function SignUpPage() {
   const initialData = {
     firstName: "",
     lastName: "",
@@ -17,7 +18,7 @@ function SignUpPage() {
     useContext(AuthContext);
 
   const handleOnSubmit = () => {
-    SignupUserWithEmailAndPassword(formData);
+    debounceFunction(SignupUserWithEmailAndPassword(formData));
   };
 
   const handleOnValueChange = (event) => {
@@ -110,5 +111,3 @@ function SignUpPage() {
     </>
   );
 }
-
-export default SignUpPage;

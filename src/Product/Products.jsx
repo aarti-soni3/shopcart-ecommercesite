@@ -5,7 +5,7 @@ import {
 } from "../Context Provider/CreateContext";
 import ProductCard from "./ProductCard";
 import ProductItemGrid from "./ProductItemGrid";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import FilterProductSection from "./FilterProductSection";
 
 function Products() {
@@ -25,13 +25,18 @@ function Products() {
 
   return (
     <>
-      <Stack gap={2}>
+      <Stack
+        gap={4}
+        sx={{ display: "flex", width: "100%  ", height: "100vh", p: 2 }}
+      >
         <FilterProductSection />
-        <ProductItemGrid
-          products={filteredProducts}
-          renderCard={renderCard}
-          getLinkPath={getLinkPath}
-        />
+        <Box sx={{ flexGrow: 1, width: "100%", minHeight: 0 }}>
+          <ProductItemGrid
+            products={filteredProducts}
+            renderCard={renderCard}
+            getLinkPath={getLinkPath}
+          />
+        </Box>
       </Stack>
     </>
   );

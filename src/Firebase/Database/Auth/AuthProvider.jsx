@@ -63,8 +63,13 @@ export const AuthProvider = ({ children }) => {
         password
       );
       const user = userCredential.user;
-      await writeUserDataByUID(user.uid,data);
+      await writeUserDataByUID(user.uid, data);
       navigate("/");
+      setSignUpData({
+        ...loginData,
+        isSignUpError: false,
+        signUpErrorMessage: "",
+      });
       console.log("sign up user : ", user);
     } catch (error) {
       const errorCode = error.code;
@@ -111,6 +116,11 @@ export const AuthProvider = ({ children }) => {
       );
       const user = userCredential.user;
       navigate("/");
+      setLoginData({
+        ...loginData,
+        isLoginError: false,
+        loginErrorMessage: "",
+      });
       console.log("sign in user : ", user);
     } catch (error) {
       let errorMsg = "";
