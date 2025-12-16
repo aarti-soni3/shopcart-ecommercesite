@@ -4,7 +4,8 @@ import { ProductContext } from "../Context Provider/CreateContext";
 import CategoryCard from "./CategoryCard";
 
 function CategoryList() {
-  const { loading, error, getCategoryListWithProducts } = useContext(ProductContext);
+  const { loading, error, getCategoryListWithProducts } =
+    useContext(ProductContext);
 
   if (loading) return <>Loading Data...</>;
 
@@ -14,14 +15,28 @@ function CategoryList() {
     <>
       <Stack spacing={2}>
         <Box>
-          <Typography gutterBottom variant="h4">
+          <Typography gutterBottom variant="h4" fontWeight={600}>
             Popular Categories
+            <Divider
+              variant="middle"
+              sx={{
+                borderColor: "primary.main",
+                borderBottomWidth: 4,
+                borderRadius: 1,
+                width: "16%",
+                justifySelf: "center",
+                mt: 0.5,
+              }}
+            />
           </Typography>
-          <Divider sx={{ backgroundColor: "lightgray" }} />
         </Box>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={{ xs: 1, sm: 4, md: 12, lg: 16 }}>
           {Object.values(getCategoryListWithProducts()).map((category) => {
-            return <CategoryCard key={category.name} category={category} />;
+            return (
+              <Grid key={category.name} size={{ xs: 1, sm: 2, md: 3 }}>
+                <CategoryCard key={category.name} category={category} />
+              </Grid>
+            );
           })}
         </Grid>
       </Stack>

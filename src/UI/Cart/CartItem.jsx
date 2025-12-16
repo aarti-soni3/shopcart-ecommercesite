@@ -17,7 +17,10 @@ export default function CartItem({ product }) {
   const { removeFromCart, updateProductQuantity } = useContext(CartContext);
   const [isAdding, setIsAdding] = useState(false);
 
-  const handleOnAddButtonClick = async () => {
+  const handleOnAddButtonClick = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
     try {
       setIsAdding(true);
       await updateProductQuantity(product.id, 1);
@@ -28,7 +31,10 @@ export default function CartItem({ product }) {
     }
   };
 
-  const handleOnRemoveButtonClick = async () => {
+  const handleOnRemoveButtonClick = async (event) => {
+    event.stopPropagation();  
+    event.preventDefault();
+
     try {
       setIsAdding(true);
       await updateProductQuantity(product.id, -1);

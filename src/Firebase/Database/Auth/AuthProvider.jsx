@@ -8,10 +8,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context Provider/CreateContext";
 import { auth } from "../../firebaseConfig";
-import { writeUserDataByUID } from "../Users/userService";
+import { getUserDataByUID, writeUserDataByUID } from "../Users/userService";
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentUserData, setCurrentUserData] = useState(null);
 
   const [signUpData, setSignUpData] = useState({
     isSignupLoading: false,
@@ -26,16 +27,31 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const getUserDataByID = async () => {
+      const uid = currentUser?.uid;
+
+      try {
+        const userData = await getUserDataByUID(uid);
+        console.log(userData);
+        setCurrentUserData(userData);
+        return userData;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    };
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
+        getUserDataByID();
         console.log("you are logged in !");
       } else {
         setCurrentUser(null);
         console.log("you are logged out !");
       }
     });
-  }, []);
+  }, [currentUser]);
 
   const SignupUserWithEmailAndPassword = async (data) => {
     const email = data.email;
@@ -150,6 +166,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // const getUserDataByID = useCallback(async () => {
+  //   const uid = currentUser?.uid;
+
+  //   if (!uid) {
+  //     throw new Error("User not authenticated.");
+  //   }
+
+  //   try {
+  //     const userData = await getUserDataByUID(uid);
+  //     console.log(userData);
+  //     setCurrentUserData(userData);
+  //     return userData;
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  // }, [currentUser]);
+
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
@@ -164,6 +198,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         currentUser,
+        currentUserData,
         signUpData,
         SignupUserWithEmailAndPassword,
         signOutUser,

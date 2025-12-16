@@ -8,6 +8,8 @@ import {
   IconButton,
   Badge,
   Typography,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
@@ -15,6 +17,8 @@ import UserProfile from "./User/UserProfile";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useContext } from "react";
 import { CartContext } from "../Context Provider/CreateContext";
+import NavigationLink from "./NavigationLink";
+import HamburgerMenuButton from "./HamBurgerMenuButton";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,71 +63,66 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Navbar() {
   const { getCartItemCount } = useContext(CartContext);
 
+  const theme = useTheme();
+
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+  const isMdDown = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: "gray", p: 1 }}>
-        <Stack gap={2} direction={"row"} justifyContent={"space-between"}>
-          <NavLink to="/">
-            <Stack gap={2} direction={"row"}>
-              <Box
-                component="img"
-                sx={{
-                  height: 40,
-                  width: 40,
-                }}
-                alt="Logo"
-                src="/shopcart logo.png"
-              />
-              <Typography variant="h5" fontSize={30} color="orange">
-                ShopCart
-              </Typography>
-            </Stack>
-          </NavLink>
-
-          <Stack
-            gap={2}
-            spacing={1}
-            direction={"row"}
-            fontSize={20}
-            sx={{ mt: 0.8 }}
-          >
-            {/* <nav> */}
+      <AppBar
+        position="fixed"
+        sx={{ backgroundColor: "background.default", p: 1 }}
+      >
+        <Stack direction={"row"} justifyContent={"space-between"}>
+          <Stack gap={2} direction={"row"}>
+            {isMdDown && <HamburgerMenuButton />}
             <NavLink to="/">
-              <Box sx={{ color: "white" }}> Home</Box>
+              <Stack gap={0.5} direction={"row"}>
+                <ShoppingCartOutlinedIcon
+                  sx={{ color: "primary.main", fontSize: 40 }}
+                />
+                <Typography
+                  variant="h5"
+                  fontSize={30}
+                  fontWeight={600}
+                  color="primary.main"
+                >
+                  ShopCart
+                </Typography>
+              </Stack>
             </NavLink>
-            <NavLink to="/product">
-              <Box sx={{ color: "white" }}>Products</Box>
-            </NavLink>
-            <NavLink to="/about">
-              <Box sx={{ color: "white" }}>About</Box>
-            </NavLink>
-            <NavLink to="/contact">
-              <Box sx={{ color: "white" }}>Contact</Box>
-            </NavLink>
-            {/* <NavLink to="/product/:id"> Products</NavLink> */}
-            {/* </nav> */}
           </Stack>
 
+          {isMdUp && (
+            <Stack
+              gap={2}
+              spacing={1}
+              direction={"row"}
+              fontSize={20}
+              sx={{ mt: 0.8 }}
+            >
+              <NavigationLink to="/" label="Home" />
+              <NavigationLink to="/product" label="Products" />
+              <NavigationLink to="/about" label="About" />
+              <NavigationLink to="/contact" label="Contact" />
+            </Stack>
+          )}
+
           <Stack direction={"row"}>
-            {/* <ListItem>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchOutlinedIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
-            </ListItem> */}
-            <ListItem>
-              <UserProfile />
-            </ListItem>
-            <ListItem>
+            {isMdUp && (
+              <ListItem sx={{ p: "0px 16px" }}>
+                <UserProfile />
+              </ListItem>
+            )}
+            <ListItem sx={{ p: "0px 16px" }}>
               <NavLink to="/cart">
                 <IconButton>
                   <Badge badgeContent={getCartItemCount()} color="primary">
-                    <ShoppingCartOutlinedIcon fontSize="small" />
+                    <ShoppingCartOutlinedIcon
+                      fontSize="small"
+                      sx={{ color: "text.primary" }}
+                    />
                   </Badge>
                 </IconButton>
               </NavLink>

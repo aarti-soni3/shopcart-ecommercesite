@@ -1,4 +1,4 @@
-import { get, ref, set } from "firebase/database";
+import { child, get, ref, set } from "firebase/database";
 import { database } from "../../firebaseConfig";
 
 const USER_PATH = "users";
@@ -25,4 +25,17 @@ export const writeUserDataByUID = (uid, data) => {
     email: data.email,
     password: data.password,
   });
+};
+
+export const getUserDataByUID = async (uid) => {
+  const dbRef = ref(database);
+  const path = USER_PATH + "/" + uid;
+
+  const snapshot = await get(child(dbRef, path));
+
+  if (snapshot.exists()) {
+    return snapshot.val();
+  } else {
+    return null;
+  }
 };

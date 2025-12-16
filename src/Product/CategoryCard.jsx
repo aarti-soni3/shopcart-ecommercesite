@@ -7,36 +7,34 @@ import { Link } from "react-router-dom";
 function CategoryCard({ category }) {
   return (
     <>
-      <Grid key={category.name} size={3}>
-        <Link key={category.name} to={`/product/category/${category.name}`}>
-          <Card sx={{ display: "flex" }}>
-            <CardMedia
-              component="img"
-              sx={{ width: 100 }}
-              image={category.image}
-              alt="Category Image"
-            />
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <CardContent sx={{ flex: "1 0 auto", textAlign: "start" }}>
-                <Typography
-                  component="div"
-                  variant="h6"
-                  fontSize={{ xs: 12, sm: 15, md: 18 }}
-                >
-                  {category.name}
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  component="div"
-                  sx={{ color: "text.secondary" }}
-                >
-                  {category?.products?.length + " Items Available"}
-                </Typography>
-              </CardContent>
-            </Box>
-          </Card>
-        </Link>
-      </Grid>
+      <Link key={category.name} to={`/product/category/${category.name}`}>
+        <Card sx={{ display: "flex" }}>
+          <CardMedia
+            component="img"
+            sx={{ width: 100 }}
+            image={category.image}
+            alt="Category Image"
+          />
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flex: "1 0 auto", textAlign: "start" }}>
+              <Typography
+                component="div"
+                variant="h6"
+                fontSize={{ xs: 12, sm: 15, md: 18 }}
+              >
+                {category.name}
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                component="div"
+                sx={{ color: "text.secondary" }}
+              >
+                {category?.products?.length + " Items"}
+              </Typography>
+            </CardContent>
+          </Box>
+        </Card>
+      </Link>
     </>
   );
 }

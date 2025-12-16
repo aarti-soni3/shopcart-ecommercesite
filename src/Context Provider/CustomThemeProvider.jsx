@@ -3,8 +3,64 @@ import { createTheme } from "@mui/material";
 
 function CustomThemeProvider({ children }) {
   const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#F97316", // Vibrant Orange
+        light: "#fe974eff", // Light Orange
+        dark: "#e66c0fff", // Dark Orange
+        contrastText: "#FFFFFF", // White text on orange
+      },
+
+      secondary: {
+        main: "#2C3E50", // Dark Blue-Gray
+        light: "#4A5F7F", // Light Blue-Gray
+        dark: "#1A252F", // Darker Blue-Gray
+        contrastText: "#FFFFFF", // White text
+      },
+
+      error: {
+        main: "#E53935", // Red
+        light: "#EF5350", // Light Red
+        dark: "#C62828", // Dark Red
+        contrastText: "#FFFFFF",
+      },
+
+      warning: {
+        main: "#FB8C00", // Amber/Orange
+        light: "#FFB74D", // Light Amber
+        dark: "#E65100", // Dark Amber
+        contrastText: "#000000",
+      },
+
+      success: {
+        main: "#43A047", // Green
+        light: "#66BB6A", // Light Green
+        dark: "#2E7D32", // Dark Green
+        contrastText: "#FFFFFF",
+      },
+
+      info: {
+        main: "#1E88E5", // Blue
+        light: "#42A5F5", // Light Blue
+        dark: "#1565C0", // Dark Blue
+        contrastText: "#FFFFFF",
+      },
+
+      background: {
+        default: "#F5F5F5", // Light Gray (page background)
+        paper: "#FFFFFF", // White (cards, modals, etc.)
+      },
+
+      text: {
+        primary: "#212121", // Almost Black (main text)
+        secondary: "#757575", // Gray (secondary text)
+        disabled: "#BDBDBD", // Light Gray (disabled text)
+      },
+
+      divider: "#E0E0E0",
+    },
+
     // TYPOGRAPHY CONFIGURATION
-    // Defines font styles throughout the app
     typography: {
       fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
 
@@ -43,16 +99,13 @@ function CustomThemeProvider({ children }) {
 
       // Button text
       button: {
-        textTransform: "none", // Don't uppercase buttons
+        textTransform: "none",
         fontWeight: 500,
       },
     },
 
-    // shape: {
-    //   borderRadius: 2,
-    // },
     shape: {
-      borderRadius: 8, // You can set any numeric value here (e.g., 2, 4, 8, etc.)
+      borderRadius: 8,
     },
 
     // COMPONENT OVERRIDES
