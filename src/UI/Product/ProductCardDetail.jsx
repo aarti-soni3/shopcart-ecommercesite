@@ -10,9 +10,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CartContext, ProductContext } from "../Context Provider/CreateContext";
-import { discountPriceFromPercentage } from "../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { CartContext, ProductContext } from "../../Context Provider/CreateContext";
+import { discountPriceFromPercentage } from "../../utils/math";
 
 function ProductCardDetail() {
   const { id } = useParams();

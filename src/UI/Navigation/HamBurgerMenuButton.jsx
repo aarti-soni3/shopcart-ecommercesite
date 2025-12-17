@@ -12,7 +12,7 @@ import {
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useContext, useState } from "react";
 import NavigationLink from "./NavigationLink";
-import AccountMenu from "./User/UserProfileButton";
+import AccountMenu from "../User/UserProfileButton";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
@@ -20,7 +20,7 @@ import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useLocation } from "react-router-dom";
-import { AuthContext } from "../Context Provider/CreateContext";
+import { AuthContext } from "../../Context Provider/CreateContext";
 
 export default function HamburgerMenuButton() {
   const { currentUser, currentUserData, signOutUser } = useContext(AuthContext);

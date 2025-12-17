@@ -5,7 +5,7 @@ import { Grid, AutoSizer } from "react-virtualized";
 import "react-virtualized/styles.css";
 
 function ProductItemGrid({ products, renderCard, getLinkPath }) {
-  console.log(products);
+  // console.log(products);
   const productsArray = useMemo(() => {
     return Array.isArray(products) ? products : Object.values(products);
   }, [products]);
@@ -33,15 +33,15 @@ function ProductItemGrid({ products, renderCard, getLinkPath }) {
     const product = productsArray[index];
     const id = product.id || index;
 
-    console.log(
-      containerWidth,
-      columnCount,
-      index,
-      rowIndex,
-      columnIndex,
-      key,
-      style
-    );
+    // console.log(
+    //   containerWidth,
+    //   columnCount,
+    //   index,
+    //   rowIndex,
+    //   columnIndex,
+    //   key,
+    //   style
+    // );
 
     return (
       // <div key={key} style={style}>
@@ -56,13 +56,13 @@ function ProductItemGrid({ products, renderCard, getLinkPath }) {
     <Box sx={{ flexGrow: 1, width: "100%", height: "100%", display: "flex" }}>
       <AutoSizer>
         {({ width, height }) => {
-          console.log(width);
+          // console.log(width);
           // Calculate how many columns can fit
           const columnCount = Math.max(1, Math.floor(width / cardWidth));
-          console.log(columnCount);
+          // console.log(columnCount);
           // Calculate how many rows we need
           const rowCount = Math.ceil(productsArray.length / columnCount);
-          console.log(rowCount);
+          // console.log(rowCount);
 
           return (
             <Grid

@@ -1,14 +1,11 @@
-import { twoDecimalValue } from "../utils/math";
-import { trimSentence } from "../utils/string";
 import Card from "@mui/material/Card";
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import { Stack } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { twoDecimalValue } from "../../utils/math";
+import { trimSentence } from "../../utils/string";
 
 export default function OrderItem({ product }) {
   return (

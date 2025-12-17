@@ -1,29 +1,30 @@
 import "./App.css";
-import Navbar from "./UI/Navbar";
-import About from "./UI/About";
-import Contact from "./UI/Contact";
+import About from "./UI/Other/About.jsx";
 import LoginPage from "./UI/User/LoginPage";
 import SignUpPage from "./UI/User/SignUpPage";
-import Products from "./Product/Products";
 import { Route, Routes } from "react-router-dom";
-import CategoryList from "./Product/CategoryList";
-import ProductCardDetail from "./Product/ProductCardDetail";
-import ProductByCategory from "./Product/ProductByCategory";
-import FilterProductProvider from "./Firebase/Database/Product/FilterProductProvider";
-import PlaceOrderPage from "./UI/PlaceOrderPage";
 import CartPage from "./UI/Cart/CartPage";
 import ProfilePage from "./UI/User/ProfilePage";
-import OrderSuccessPage from "./UI/OrderSuccessPage";
-import OrderFailedPage from "./UI/OrderFailedPage";
-import OrderHistoryPage from "./UI/OrderHistoryPage";
-import PageNotFound from "./UI/PageNotFound";
+import Navbar from "./UI/Navigation/Navbar.jsx";
+import Contact from "./UI/Other/Contact.jsx";
+import Products from "./UI/Product/Products.jsx";
+import ProductCardDetail from "./UI/Product/ProductCardDetail.jsx";
+import ProductByCategory from "./UI/Product/ProductByCategory.jsx";
+import FilterProductProvider from "./Firebase/Database/Product/FilterProductProvider.jsx";
+import PlaceOrderPage from "./UI/Order/PlaceOrderPage.jsx";
+import OrderSuccessPage from "./UI/Order/OrderSuccessPage.jsx";
+import OrderHistoryPage from "./UI/Order/OrderHistoryPage.jsx";
+import OrderFailedPage from "./UI/Order/OrderFailedPage.jsx";
+import PageNotFound from "./UI/Other/PageNotFound.jsx";
+import Home from "./UI/Other/Home.jsx";
+import ProductsByDiscount from "./UI/Product/productsByDiscount.jsx";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<CategoryList />} />
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
@@ -35,6 +36,7 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/product/:id" element={<ProductCardDetail />} />
+        <Route path="/product/upto15" element={<ProductsByDiscount />} />
         <Route
           path="/product"
           element={
@@ -44,7 +46,7 @@ function App() {
           }
         />
         <Route
-          path="/product/category/:category"
+          path="/product/category/:id"
           element={<ProductByCategory />}
         />
 

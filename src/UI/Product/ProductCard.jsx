@@ -2,13 +2,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { trimSentence } from "../utils/string";
+import { trimSentence } from "../../utils/string";
 import { Rating, Stack } from "@mui/material";
-import { discountPriceFromPercentage } from "../utils/math";
+import { discountPriceFromPercentage } from "../../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { IconButton } from "@mui/material";
 import { memo, useContext, useState } from "react";
-import { CartContext } from "../Context Provider/CreateContext";
+import { CartContext } from "../../Context Provider/CreateContext";
 
 function ProductCard({ product }) {
   const {

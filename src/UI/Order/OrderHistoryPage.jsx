@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { OrderContext } from "../Context Provider/CreateContext";
 import OrderItem from "./OrderItem";
 import { Box, Card, Stack, Typography } from "@mui/material";
-import { twoDecimalValue } from "../utils/math";
+import { OrderContext } from "../../Context Provider/CreateContext";
+import { twoDecimalValue } from "../../utils/math";
 
 export default function OrderHistoryPage() {
   const { orderData, loading, error } = useContext(OrderContext);
@@ -22,7 +22,7 @@ export default function OrderHistoryPage() {
       {Object.values(orderData).map((order) => {
         return (
           <>
-            <Card sx={{ backgroundColor: "lightgray" }}>
+            <Card key={order.orderId} sx={{ backgroundColor: "lightgray" }}>
               <Stack
                 direction={"row"}
                 gap={2}

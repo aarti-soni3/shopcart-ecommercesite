@@ -1,33 +1,48 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
+import { trimSentence } from "../../utils/string";
 
 function CategoryCard({ category }) {
   return (
     <>
-      <Link key={category.name} to={`/product/category/${category.name}`}>
-        <Card sx={{ display: "flex" }}>
+      <Link key={category.name} to={`/product/category/${category.id}`}>
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "row", sm: "column" },
+            minHeight: { xs: 100, sm: 210 },
+            maxHeight: { xs: 120, sm: 250 },
+            minWidth: { xs: 250, sm: 150 },
+            maxWidth: { xs: 280, sm: 180 },
+          }}
+        >
           <CardMedia
             component="img"
-            sx={{ width: 100 }}
             image={category.image}
             alt="Category Image"
+            sx={{
+              objectFit: "contain",
+              height: { xs: 110, sm: 125 },
+              width: { xs: "50%", sm: "100%" },
+            }}
           />
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flex: "1 0 auto", textAlign: "start" }}>
               <Typography
                 component="div"
                 variant="h6"
-                fontSize={{ xs: 12, sm: 15, md: 18 }}
-              >
-                {category.name}
+                fontSize={{ xs: 15, sm: 18, md: 20 }}
+                >
+                {trimSentence(category.name, 20)}
               </Typography>
               <Typography
                 variant="subtitle2"
                 component="div"
                 sx={{ color: "text.secondary" }}
+                fontSize={{ xs: 12, sm: 14, md: 16 }}
               >
                 {category?.products?.length + " Items"}
               </Typography>

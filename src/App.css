@@ -1,9 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 1920px;
+  /* margin: 0 auto; */
   text-align: center;
-
+  /* padding: 2rem; */
   width: 100%;
   height: 100%;
 }
@@ -19,6 +18,17 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.full-width-no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  /* If the Hero should also be full width, you might need to adjust margin/width */
+  width: 100vw;
+  max-width: none;
+  /* Adjust margin if necessary to counteract the root container's margin */
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
 }
 
 @keyframes logo-spin {

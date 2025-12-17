@@ -1,6 +1,11 @@
 import { replaceHypensToWhiteSpace } from "../../../utils/string";
 import { ProductContext } from "../../../Context Provider/CreateContext";
 import { useProductData } from "../../../Hooks/useProductData";
+import { useCallback } from "react";
+import {
+  getMainCategoryDisplayName,
+  getMainCategoryKey,
+} from "../../../utils/categoryMappingConfig";
 
 function ProductProvider({ children }) {
   //TODO: need to extract here...dont pass as single var to provider
@@ -10,7 +15,7 @@ function ProductProvider({ children }) {
     return products.find((product) => String(product.id) === String(id));
   };
 
-  const getCategoryListWithProducts = () => {
+  const getCategoryListWithProducts = useCallback(() => {
     return products.reduce((accummulator, currentProduct) => {
       const categoryName = currentProduct.category;
 
@@ -26,6 +31,44 @@ function ProductProvider({ children }) {
       accummulator[categoryName].products.push(currentProduct);
       return accummulator;
     }, {});
+  }, [products]);
+
+  const getMainCategoryListWithProducts = useCallback(() => {
+    return products.reduce((accummulator, currentProduct) => {
+      const categoryName = currentProduct.category;
+      const mainCategoryKey = getMainCategoryKey(categoryName);
+      const mainCateogryName = getMainCategoryDisplayName(mainCategoryKey);
+
+      if (!accummulator[mainCategoryKey]) {
+        accummulator[mainCategoryKey] = {
+          id: mainCategoryKey,
+          name: mainCateogryName,
+          image: currentProduct?.thumbnail,
+          subCategories: {},
+          products: [],
+        };
+      }
+
+      if (!accummulator[mainCategoryKey].subCategories[categoryName]) {
+        accummulator[mainCategoryKey].subCategories[categoryName] = {
+          id: categoryName,
+          name: replaceHypensToWhiteSpace(categoryName),
+          image: currentProduct?.thumbnail,
+          products: [],
+        };
+      }
+
+      accummulator[mainCategoryKey].products.push(currentProduct);
+      accummulator[mainCategoryKey].subCategories[categoryName].products.push(
+        currentProduct
+      );
+      return accummulator;
+    }, {});
+  }, [products]);
+
+  const getProductsFromMainCategory = async (mainCategoryKey) => {
+    const mainCategoryData = await getMainCategoryListWithProducts();
+    return mainCategoryData[mainCategoryKey].products;
   };
 
   const getCategoryListWithFormattedText = () => {
@@ -46,6 +89,12 @@ function ProductProvider({ children }) {
     return products.filter((product) => product.category === category);
   };
 
+  const getProductsByDiscountedPercentage = (discountPercentage) => {
+    return products.filter((product) => {
+      return product.discountPercentage >= discountPercentage;
+    });
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -56,6 +105,9 @@ function ProductProvider({ children }) {
         getCategoryListWithProducts,
         getProductsByCategory,
         getCategoryListWithFormattedText,
+        getMainCategoryListWithProducts,
+        getProductsFromMainCategory,
+        getProductsByDiscountedPercentage,
       }}
     >
       {children}

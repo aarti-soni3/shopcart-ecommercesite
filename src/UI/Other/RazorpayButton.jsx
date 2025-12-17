@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, CircularProgress, Alert } from "@mui/material";
-import { createRazorPayOptions ,isRazorpayLoaded} from "../utils/razorpayConfig";
+import { createRazorPayOptions, isRazorpayLoaded } from "../../utils/razorpayConfig";
 
 export default function RazorpayButton({ 
   amount, 
