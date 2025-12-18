@@ -1,7 +1,7 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import Logo from "../Logo";
 import NavigationLink from "../Navigation/NavigationLink";
-import { socialmediaSVGIcons } from "../../utils/socialmediaSVGIcons";
+import { socialmediaSVGIcons } from "../../utils/SocialMediaSVGIcons";
 
 export default function Footer() {
   return (
