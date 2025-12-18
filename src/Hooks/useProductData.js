@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchProductsFromAPI } from "../services/apiService";
+import { fetchProductsFromAPI } from "../Services/apiService";
 import {
   fetchProductsFromFirebase,
   saveProductsToFirebase,
