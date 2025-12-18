@@ -26,7 +26,7 @@
     "react-razorpay": "^3.0.1",
     "react-router-dom": "^7.9.6",
     "react-virtualized": "^9.22.6",
-    "react-window": "^1.8.10",
+    "react-window": "^1.8.11",
     "yup": "^1.7.1"
   },
   "devDependencies": {
