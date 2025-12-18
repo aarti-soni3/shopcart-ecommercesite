@@ -8,8 +8,6 @@ import { NavLink } from "react-router-dom";
 export default function OrderHistoryPage() {
   const { orderData, loading, error } = useContext(OrderContext);
 
-  console.log(orderData);
-
   if (loading) return <>Data is loading...</>;
 
   if (error) return <>Something went wrong...</>;

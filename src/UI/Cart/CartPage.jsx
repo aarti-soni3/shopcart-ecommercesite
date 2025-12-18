@@ -1,26 +1,47 @@
 import {
   Box,
-  IconButton,
-  List,
-  ListItem,
   Typography,
   Button,
+  Paper,
+  Stack,
+  Divider,
+  CardMedia,
 } from "@mui/material";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import CartSummary from "./CartSummary";
 import CartItem from "./CartItem";
 import { CartContext } from "../../Context Provider/CreateContext";
+import { twoDecimalValue } from "../../utils/math";
 
 export default function CartPage() {
-  const { cart, loading, error, clearUserCart } = useContext(CartContext);
+  const { cart, loading, error, clearUserCart, getCartItemCount } =
+    useContext(CartContext);
 
   if (loading) {
     return <>Loading...</>;
   }
 
   if (!cart) {
-    return <> Cart is Empty....</>;
+    return (
+      <>
+        <Stack sx={{mb:10}}>
+          <CardMedia
+            component="img"
+            alt="product image"
+            image={"/cartempty.png"}
+            sx={{
+              width: 500,
+              height: 500,
+              objectFit: "contain",
+              alignSelf:'center'
+            }}
+          />
+          <Typography fontWeight={600} variant="h2">
+            Cart is empty...
+          </Typography>
+        </Stack>
+      </>
+    );
   }
 
   if (error) {
@@ -29,48 +50,54 @@ export default function CartPage() {
 
   return (
     <>
-      <Box
-        sx={{ margin: 2 }}
+      <Paper
+        sx={{ margin: 6, mt: 15, p: 5, textAlign: "left" }}
         display={"flex"}
-        flexDirection={"row"}
-        justifyContent={"space-between"}
       >
-        <Typography variant="h5">Shopping Cart</Typography>
-        <IconButton
-          onClick={() => {
-            clearUserCart();
-          }}
-        >
-          <Typography
-            variant="h5"
-            sx={{ textDecoration: "underline", color: "blue" }}
+        <Stack direction={"row"} justifyContent={"space-between"}>
+          <Typography variant="h1" fontWeight={700}>
+            Shopping Cart
+          </Typography>
+          <Button
+            onClick={() => {
+              clearUserCart();
+            }}
+            variant="large"
+            sx={{ color: "primary.main", fontWeight: 700, fontSize: 20 }}
           >
             Clear All
-          </Typography>
-        </IconButton>
-      </Box>
-      <List>
+          </Button>
+        </Stack>
+        <Divider variant="middle" />
         {Object.values(cart.products).map((product) => {
           return (
-            <ListItem key={product.id}>
-              <NavLink key={product.id} to={`/product/${product.id}`}>
-                <CartItem key={product.id} product={product} />
-              </NavLink>
-            </ListItem>
+            <NavLink key={product.id} to={`/product/${product.id}`}>
+              <CartItem key={product.id} product={product} />
+            </NavLink>
           );
         })}
-      </List>
 
-      <br />
-      <br />
-      <CartSummary discountedTotal={cart.discountedTotal} />
-
-      <br />
-      <NavLink to="/placeorder">
-        <Button variant="contained" sx={{ width: 370 }}>
-          Checkout
-        </Button>
-      </NavLink>
+        <Stack
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          gap={2}
+        >
+          <Box display={"flex"} flexDirection={"row"}>
+            <Typography variant="subtitle1" fontWeight={600}>
+              Grand Total {"(" + getCartItemCount() + " items)"}:{" "}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ ml: 2 }}>
+              &#8377; {twoDecimalValue(cart.discountedTotal)}
+            </Typography>
+          </Box>
+          <NavLink to="/placeorder">
+            <Button variant="contained" sx={{ width: 370 }}>
+              Checkout
+            </Button>
+          </NavLink>
+        </Stack>
+      </Paper>
     </>
   );
 }

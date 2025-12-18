@@ -32,7 +32,7 @@ export default function CartItem({ product }) {
   };
 
   const handleOnRemoveButtonClick = async (event) => {
-    event.stopPropagation();  
+    event.stopPropagation();
     event.preventDefault();
 
     try {
@@ -46,127 +46,129 @@ export default function CartItem({ product }) {
   };
 
   return (
-    <>
-      <Card
-        sx={{
-          display: "flex",
-          minWidth: {
-            sm: 450,
-            md: 850,
-            lg: 1050,
-          },
-          minHeight: {
-            xs: 140,
-            sm: 140,
-            md: 160,
-            lg: 180,
-          },
-          maxWidth: {
-            sm: 650,
-            md: 1050,
-            lg: 1250,
-          },
-          maxHeight: {
-            xs: 140,
-            sm: 140,
-            md: 160,
-            lg: 180,
-          },
-        }}
-      >
+    <Card sx={{ m: 4, display: "flex" }}>
+      <Stack justifyContent={"flex-start"}>
         <CardMedia
           component="img"
           alt="product image"
-          //   image={"/shopcart logo.png"}
           image={product?.thumbnail}
           sx={{
-            width: 220,
+            width: 200,
+            height: 200,
             objectFit: "contain",
             backgroundColor: "#e8e8e8ff",
           }}
         />
-
-        <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-          <CardContent
+      </Stack>
+      <Stack direction={"row"} sx={{ m: 2 }}>
+        <Stack>
+          <Typography
+            variant="h5"
+            fontSize={{ xs: 16, sm: 18, md: 22 }}
+            fontWeight={600}
+            component="div"
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              pb: 0,
-              placeItems: "flex-start",
-              justifyContent: "space-between",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
             }}
           >
-            <Stack sx={{ minWidth: 250, maxWidth: 750 }}>
-              <Typography variant="h5" fontWeight={600} component="div">
-                {trimSentence(product?.title, 30)}
-              </Typography>
+            {trimSentence(product?.title, 20)}
+          </Typography>
 
-              <Typography variant="subtitle1" sx={{ color: "text.secondary" }}>
-                {product?.brand}
-              </Typography>
+          <Stack
+            direction={{ xs: "row", sm: "row" }}
+            gap={{ xs: 1, sm: 2 }}
+            sx={{ flexWrap: "wrap" }}
+          >
+            <Typography
+              gutterBottom
+              variant="h6"
+              fontSize={{ xs: 12, sm: 13 }}
+              sx={{ textDecoration: "line-through", m: 0 }}
+            >
+              &#36;{product?.price}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              fontSize={{ xs: 12, sm: 13 }}
+              fontWeight={600}
+              color="success.main"
+              sx={{ m: 0 }}
+            >
+              &#8722;{product?.discountPercentage}&#37;
+            </Typography>
+          </Stack>
 
-              <Stack direction={"row"} gap={2}>
-                <Typography
-                  gutterBottom
-                  fontSize={13}
-                  variant="h6"
-                  component="div"
-                  sx={{ textDecoration: "line-through" }}
-                >
-                  &#36;{product?.price}
-                </Typography>
-                <Typography
-                  gutterBottom
-                  fontSize={13}
-                  fontWeight={600}
-                  variant="h6"
-                  component="div"
-                >
-                  &#8722;{product?.discountPercentage}&#37;
-                </Typography>
-              </Stack>
+          <Stack gap={1} direction="row" sx={{ mt: 1 }} alignItems="center">
+            <IconButton
+              sx={{
+                border: 1,
+                width: { xs: 32, sm: 28 },
+                height: { xs: 32, sm: 28 },
+                p: 0,
+              }}
+              onClick={handleOnRemoveButtonClick}
+              disabled={isAdding}
+            >
+              <RemoveOutlinedIcon fontSize="small" color="primary" />
+            </IconButton>
+            <Typography
+              fontSize={{ xs: 16, sm: 20 }}
+              variant="h6"
+              component="div"
+              sx={{ minWidth: 24, textAlign: "center" }}
+            >
+              {product.quantity}
+            </Typography>
+            <IconButton
+              sx={{
+                border: 1,
+                width: { xs: 32, sm: 28 },
+                height: { xs: 32, sm: 28 },
+                p: 0,
+              }}
+              onClick={handleOnAddButtonClick}
+              disabled={isAdding}
+            >
+              <AddOutlinedIcon fontSize="small" color="primary" />
+            </IconButton>
+          </Stack>
+        </Stack>
 
-              <Stack direction={"row"} gap={2} justifyContent={"space-between"}>
-                <IconButton
-                  sx={{ border: 1 }}
-                  onClick={handleOnRemoveButtonClick}
-                  disabled={isAdding}
-                >
-                  <RemoveOutlinedIcon color="primary" />
-                </IconButton>
-                <Typography fontSize={19} variant="h6" component="div">
-                  {product.quantity}
-                </Typography>
-                <IconButton
-                  sx={{ border: 1 }}
-                  onClick={handleOnAddButtonClick}
-                  disabled={isAdding}
-                >
-                  <AddOutlinedIcon color="primary" />
-                </IconButton>
-              </Stack>
-            </Stack>
-            <Stack sx={{ minWidth: 100, textAlign: "right" }}>
-              <Typography fontSize={19} variant="h6" component="div">
-                &#36; {twoDecimalValue(product.discountedTotal)}
-              </Typography>
+        <Stack
+          sx={{
+            minWidth: { xs: "100%", sm: 100 },
+            textAlign: { xs: "left", sm: "right" },
+            alignItems: { xs: "flex-start", sm: "flex-end" },
+          }}
+        >
+          <Typography
+            fontSize={{ xs: 18, sm: 19 }}
+            variant="h6"
+            fontWeight={600}
+            component="div"
+          >
+            &#36; {twoDecimalValue(product.discountedTotal)}
+          </Typography>
 
-              <IconButton
-                size="large"
-                color="primary"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  removeFromCart(product.id);
-                }}
-                sx={{ p: 0 }}
-              >
-                <DeleteOutlineOutlinedIcon sx={{ m: 0 }} />
-              </IconButton>
-            </Stack>
-          </CardContent>
-        </Box>
-      </Card>
-    </>
+          <IconButton
+            size="large"
+            color="primary"
+            onClick={(event) => {
+              event.stopPropagation();
+              event.preventDefault();
+              removeFromCart(product.id);
+            }}
+            sx={{ p: 1, mt: 1 }}
+          >
+            <DeleteOutlineOutlinedIcon />
+          </IconButton>
+        </Stack>
+      </Stack>
+    </Card>
   );
 }

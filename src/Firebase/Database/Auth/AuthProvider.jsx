@@ -89,21 +89,7 @@ export const AuthProvider = ({ children }) => {
       console.log("sign up user : ", user);
     } catch (error) {
       const errorCode = error.code;
-      let errorMsg = "";
-
-      if (errorCode === "auth/email-already-in-use") {
-        errorMsg = "This email is already registered. Please log in.";
-      } else if (errorCode === "auth/invalid-email") {
-        errorMsg = "Missing email or password.";
-      } else if (errorCode === "auth/missing-password") {
-        errorMsg = "Missing email or password.";
-      } else if (errorCode === "auth/invalid-password") {
-        errorMsg = "Email or Password does not meet minimum requirements.";
-      } else if (errorCode === "auth/weak-password") {
-        errorMsg = "Password must be at least 6 characters long.";
-      } else {
-        errorMsg = "something went wrong... Error Code : " + errorCode;
-      }
+      let errorMsg = getErrorMessage(errorCode);
 
       setSignUpData((prevData) => ({
         ...prevData,
@@ -139,20 +125,9 @@ export const AuthProvider = ({ children }) => {
       });
       console.log("sign in user : ", user);
     } catch (error) {
-      let errorMsg = "";
-
       const errorCode = error.code;
-      if (errorCode === "auth/invalid-credential") {
-        errorMsg = "Invalid email or password. Please check your credentials.";
-      } else if (errorCode === "auth/invalid-email") {
-        errorMsg = "Missing email or password.";
-      } else if (errorCode === "auth/missing-password") {
-        errorMsg = "Missing email or password.";
-      } else if (errorCode === "auth/invalid-password") {
-        errorMsg = "Email or Password does not meet minimum requirements.";
-      } else if (error.code === "auth/wrong-password") {
-        errorMsg = "Wrong email or password, Please check your credentials.";
-      }
+      let errorMsg = getErrorMessage(errorCode);
+
       setLoginData((prevLoginData) => ({
         ...prevLoginData,
         isLoginError: true,
@@ -164,6 +139,30 @@ export const AuthProvider = ({ children }) => {
         isLoginLoading: false,
       }));
     }
+  };
+
+  const getErrorMessage = (errorCode) => {
+    let errorMsg = "";
+
+    if (errorCode === "auth/invalid-credential") {
+      errorMsg = "Invalid email or password. Please check your credentials.";
+    } else if (errorCode === "auth/invalid-email") {
+      errorMsg = "Missing email or password.";
+    } else if (errorCode === "auth/missing-password") {
+      errorMsg = "Missing email or password.";
+    } else if (errorCode === "auth/invalid-password") {
+      errorMsg = "Email or Password does not meet minimum requirements.";
+    } else if (errorCode === "auth/wrong-password") {
+      errorMsg = "Wrong email or password, Please check your credentials.";
+    } else if (errorCode === "auth/email-already-in-use") {
+      errorMsg = "This email is already registered. Please log in.";
+    } else if (errorCode === "auth/weak-password") {
+      errorMsg = "Password must be at least 6 characters long.";
+    } else {
+      errorMsg = "something went wrong... Error Code : " + errorCode;
+    }
+
+    return errorMsg;
   };
 
   // const getUserDataByID = useCallback(async () => {

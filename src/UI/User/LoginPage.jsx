@@ -1,9 +1,17 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context Provider/CreateContext";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const { LoginUserWithEmailAndPassword, loginData } = useContext(AuthContext);
 
   const initialData = {
@@ -28,60 +36,78 @@ function LoginPage() {
 
   return (
     <>
-      <Typography variant="h4"> Login Page</Typography>
-      <br />
-
-      <TextField
-        type="input"
-        label="Email"
-        name="email"
-        value={formData.email}
-        onChange={handleOnValueChange}
-        required
-      ></TextField>
-      <br />
-      <br />
-
-      <TextField
-        type="password"
-        label="Password"
-        name="password"
-        value={formData.password}
-        onChange={handleOnValueChange}
-        required
-      ></TextField>
-      <br />
-      <br />
-
-      <Button
-        type="submit"
-        onClick={handleOnSubmit}
-        disabled={loginData.isLoginLoading}
+      <Paper
+        elevation={3}
+        sx={{
+          p: 4,
+          mt: 15,
+          mb:12,
+          minWidth: 280,
+          maxWidth: 500,
+          justifySelf: "center",
+          borderRadius: 1,
+        }}
       >
-        {loginData.isLoginLoading ? "Loggin in..." : "Login"}
-      </Button>
+        <Stack gap={3}>
+          <Typography variant="h3" fontWeight={700} fontSize={25}>
+            {" "}
+            Login Page
+          </Typography>
 
-      {loginData.isLoginError && (
-        <Box
-          sx={{
-            color: "white",
-            backgroundColor: "gray",
-            padding: "10px",
-            borderRadius: "5px",
-          }}
-        >
-          <Typography fontWeight={600}>Login Failed:</Typography>
-          <Typography>{loginData.loginErrorMessage}</Typography>
-        </Box>
-      )}
-        <Box>
-          New User ?{" "}
-          <NavLink to="/signup">
-            <Typography sx={{ textDecoration: "underline" }}>
-              Sign Up
-            </Typography>
-          </NavLink>
-        </Box>
+          <TextField
+            type="input"
+            label="Email"
+            name="email"
+            value={formData.email}
+            onChange={handleOnValueChange}
+            required
+          ></TextField>
+
+          <TextField
+            type="password"
+            label="Password"
+            name="password"
+            value={formData.password}
+            onChange={handleOnValueChange}
+            required
+          ></TextField>
+
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={handleOnSubmit}
+            disabled={loginData.isLoginLoading}
+          >
+            {loginData.isLoginLoading ? "Loggin in..." : "Login"}
+          </Button>
+
+          {loginData.isLoginError && (
+            <Box
+              sx={{
+                color: "white",
+                backgroundColor: "gray",
+                padding: "10px",
+                borderRadius: "5px",
+              }}
+            >
+              <Typography fontWeight={600}>Login Failed:</Typography>
+              <Typography>{loginData.loginErrorMessage}</Typography>
+            </Box>
+          )}
+
+          <Box display={"flex"} flexDirection={"column"}>
+            New User ?
+            <Button
+              onClick={() => {
+                navigate("/signup");
+              }}
+              sx={{ fontWeight: 600, fontSize: 15 }}
+            >
+              Create Account
+            </Button>
+          </Box>
+        </Stack>
+      </Paper>
     </>
   );
 }

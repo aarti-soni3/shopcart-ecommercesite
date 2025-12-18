@@ -19,17 +19,17 @@ export default function OrderItem({ product }) {
         }}
       >
         <Stack direction={{ xs: "column", sm: "row" }} sx={{ width: "100%" }}>
-            <CardMedia
-              component="img"
-              alt="product image"
-              image={product?.thumbnail}
-              sx={{
-                width:{xs: '100%',sm:120},
-                height:{xs: 120,sm:120},
-                objectFit: "contain",
-                backgroundColor: "#e8e8e8ff",
-              }}
-            />
+          <CardMedia
+            component="img"
+            alt="product image"
+            image={product?.thumbnail}
+            sx={{
+              width: { xs: "100%", sm: 120 },
+              height: { xs: 120, sm: 120 },
+              objectFit: "contain",
+              backgroundColor: "#e8e8e8ff",
+            }}
+          />
 
           <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <CardContent
@@ -39,7 +39,7 @@ export default function OrderItem({ product }) {
                 pb: 0,
                 placeItems: "flex-start",
                 justifyContent: "space-between",
-                textAlign:'left',
+                textAlign: "left",
               }}
             >
               <Stack>

@@ -147,7 +147,7 @@ function CustomThemeProvider({ children }) {
       MuiPaper: {
         styleOverrides: {
           rounded: {
-            borderRadius: "1rem", // 16px rounded corners
+            borderRadius: "0.6rem", // 16px rounded corners
           },
         },
       },

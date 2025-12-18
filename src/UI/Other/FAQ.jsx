@@ -28,7 +28,7 @@ const AccordionSummary = styled((props) => (
     {...props}
   />
 ))(({ theme }) => ({
-  backgroundColor: alpha(theme.palette.primary.main,0.6),
+  backgroundColor: alpha(theme.palette.info.dark,0.3),
   flexDirection: "row-reverse",
   [`& .${accordionSummaryClasses.expandIconWrapper}.${accordionSummaryClasses.expanded}`]:
     {
@@ -88,7 +88,7 @@ export default function FAQ() {
                 color="info.main"
               />
             }
-            label="FAQs"
+            label="FAQ's"
             variant="outlined"
             sx={{ mb: 2 }}
           />
