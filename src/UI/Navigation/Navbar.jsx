@@ -7,18 +7,18 @@ import {
   Stack,
   IconButton,
   Badge,
-  Typography,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import UserProfile from "../User/UserProfile";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useContext } from "react";
 import { CartContext } from "../../Context Provider/CreateContext";
 import NavigationLink from "./NavigationLink";
 import HamburgerMenuButton from "./HamBurgerMenuButton";
+import Logo from "../Logo";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -77,21 +77,7 @@ function Navbar() {
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Stack gap={2} direction={"row"}>
             {isMdDown && <HamburgerMenuButton />}
-            <NavLink to="/">
-              <Stack gap={0.5} direction={"row"}>
-                <ShoppingCartOutlinedIcon
-                  sx={{ color: "primary.main", fontSize: 40 }}
-                />
-                <Typography
-                  variant="h5"
-                  fontSize={30}
-                  fontWeight={600}
-                  color="primary.main"
-                >
-                  ShopCart
-                </Typography>
-              </Stack>
-            </NavLink>
+            <Logo/>
           </Stack>
 
           {isMdUp && (

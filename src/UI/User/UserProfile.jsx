@@ -15,7 +15,7 @@ function UserProfile() {
       <>
         {isMdUp ? (
           <NavLink to="/login">
-            <IconButton>
+            <IconButton sx={{ backgroundColor: "text.disabled" }}>
               <PersonOutlineOutlinedIcon sx={{ color: "text.primary", p: 0 }} />
             </IconButton>
           </NavLink>

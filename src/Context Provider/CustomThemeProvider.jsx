@@ -61,9 +61,8 @@ function CustomThemeProvider({ children }) {
 
       custom: {
         gradients: {
-          heroSection:
-            // "linear-gradient(90deg,rgba(59, 130, 75, 1) 0%, rgba(5, 150, 80, 1) 100%);",
-            "linear-gradient(90deg, #21C35E 0%, #059768 100%);",
+          heroSection: "linear-gradient(90deg, #21C35E 0%, #059768 100%);",
+          aboutPageCard: "linear-gradient(90deg, #F97316 0%, #EA580C 100%);",
         },
       },
     },

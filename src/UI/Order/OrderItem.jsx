@@ -12,105 +12,79 @@ export default function OrderItem({ product }) {
     <>
       <Card
         sx={{
+          backgroundColor: "transparent",
+          boxShadow: "none",
           display: "flex",
-          minWidth: {
-            sm: 450,
-            md: 850,
-            lg: 1050,
-          },
-          minHeight: {
-            xs: 140,
-            sm: 140,
-            md: 160,
-            lg: 180,
-          },
-          maxWidth: {
-            sm: 650,
-            md: 1050,
-            lg: 1250,
-          },
-          maxHeight: {
-            xs: 140,
-            sm: 140,
-            md: 160,
-            lg: 180,
-          },
+          m: 2,
         }}
       >
-        <CardMedia
-          component="img"
-          alt="product image"
-          image={product?.thumbnail}
-          sx={{
-            width: 220,
-            objectFit: "contain",
-            backgroundColor: "#e8e8e8ff",
-          }}
-        />
+        <Stack direction={{ xs: "column", sm: "row" }} sx={{ width: "100%" }}>
+            <CardMedia
+              component="img"
+              alt="product image"
+              image={product?.thumbnail}
+              sx={{
+                width:{xs: '100%',sm:120},
+                height:{xs: 120,sm:120},
+                objectFit: "contain",
+                backgroundColor: "#e8e8e8ff",
+              }}
+            />
 
-        <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              pb: 0,
-              placeItems: "flex-start",
-              justifyContent: "space-between",
-            }}
-          >
-            <Stack sx={{ minWidth: 250, maxWidth: 750 }}>
-              <Typography variant="h5" fontWeight={600} component="div">
-                {trimSentence(product?.title, 30)}
-              </Typography>
-
-              <Stack direction={"row"} gap={2}>
+          <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                pb: 0,
+                placeItems: "flex-start",
+                justifyContent: "space-between",
+                textAlign:'left',
+              }}
+            >
+              <Stack>
                 <Typography
-                  gutterBottom
-                  fontSize={13}
-                  variant="h6"
+                  variant="h5"
+                  fontSize={{ xs: 18, sm: 22 }}
+                  fontWeight={600}
                   component="div"
-                  sx={{ textDecoration: "line-through" }}
                 >
-                  &#36;{product?.price}
+                  {trimSentence(product?.title, 20)}
                 </Typography>
+
+                <Stack direction={"row"} sx={{ color: "text.secondary" }}>
+                  <Typography
+                    gutterBottom
+                    fontSize={15}
+                    variant="h6"
+                    component="div"
+                  >
+                    Quantity:
+                  </Typography>
+                  <Typography
+                    gutterBottom
+                    fontSize={15}
+                    variant="h6"
+                    component="div"
+                  >
+                    {product?.quantity}
+                  </Typography>
+                </Stack>
+              </Stack>
+              <Stack sx={{ minWidth: 100, textAlign: "right" }}>
                 <Typography
-                  gutterBottom
-                  fontSize={13}
+                  fontSize={19}
                   fontWeight={600}
                   variant="h6"
                   component="div"
                 >
-                  &#8722;{product?.discountPercentage}&#37;
+                  &#36;
+                  {twoDecimalValue(product.discountedTotal)}
                 </Typography>
               </Stack>
-              <Stack direction={'row'}>
-                <Typography
-                  gutterBottom
-                  fontSize={13}
-                  fontWeight={600}
-                  variant="h6"
-                  component="div"
-                >
-                  Quantity :
-                </Typography>
-                <Typography
-                  gutterBottom
-                  fontSize={13}
-                  variant="h6"
-                  component="div"
-                >
-                  {product?.quantity}
-                </Typography>
-              </Stack>
-            </Stack>
-            <Stack sx={{ minWidth: 100, textAlign: "right" }}>
-              <Typography fontSize={19} variant="h6" component="div">
-                &#36;
-                {twoDecimalValue(product.discountedTotal)}
-              </Typography>
-            </Stack>
-          </CardContent>
-        </Box>
+            </CardContent>
+          </Box>
+        </Stack>
       </Card>
     </>
   );

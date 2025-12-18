@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import OrderItem from "./OrderItem";
-import { Box, Card, Stack, Typography } from "@mui/material";
+import { Card, Divider, Stack, Typography } from "@mui/material";
 import { OrderContext } from "../../Context Provider/CreateContext";
-import { twoDecimalValue } from "../../utils/math";
+import OrderDetails from "./OrderDetails";
+import { NavLink } from "react-router-dom";
 
 export default function OrderHistoryPage() {
   const { orderData, loading, error } = useContext(OrderContext);
@@ -15,58 +16,52 @@ export default function OrderHistoryPage() {
 
   if (!orderData) return <>No order is found</>;
 
+  const sortedData = Object.values(orderData)?.sort((a, b) => {
+    return new Date(b?.createdAt) - new Date(a?.createdAt);
+  });
+
   return (
     <>
       <br />
       <br />
-      {Object.values(orderData).map((order) => {
-        return (
-          <>
-            <Card key={order.orderId} sx={{ backgroundColor: "lightgray" }}>
-              <Stack
-                direction={"row"}
-                gap={2}
-                justifyContent={"space-between"}
-                sx={{ mr: 2, ml: 2 }}
-                textAlign={"left"}
-              >
-                <Box>
-                  <Typography fontWeight={600}>Order Placed</Typography>
-                  <Typography>
-                    {new Date(order.createdAt).toLocaleDateString()}
-                  </Typography>
-                </Box>
+      <Stack sx={{ m: 6 }}>
+        <Typography
+          variant="h3"
+          fontWeight={800}
+          fontSize={30}
+          textAlign={"left"}
+          sx={{ mb: 4 }}
+        >
+          Order History
+        </Typography>
 
-                <Box>
-                  <Typography fontWeight={600}> Total</Typography>
-                  <Typography> {twoDecimalValue(order.cart.total)}</Typography>
-                </Box>
+        {Object.values(sortedData).map((order) => {
+          return (
+            <Card
+              elevation={4}
+              key={order.orderId}
+              sx={{
+                backgroundColor: "primary.contrastText",
+                borderRadius: 1,
+                maxWidth: 1250,
+                mb: 4,
+              }}
+            >
+              <OrderDetails key={order.orderId} order={order} />
 
-                <Box>
-                  <Typography fontWeight={600}> Order Status</Typography>
-                  <Typography> {order.orderStatus}</Typography>
-                </Box>
-
-                <Box>
-                  <Typography fontWeight={600}> Payment Method</Typography>
-                  <Typography> {order.paymentMethod}</Typography>
-                </Box>
-
-                <Box>
-                  <Typography fontWeight={600}>Order Id </Typography>
-                  <Typography>{order.orderId}</Typography>
-                </Box>
-              </Stack>
+              <Divider variant="middle" />
 
               {Object.values(order?.cart?.products).map((product) => {
-                return <OrderItem product={product} />;
+                return (
+                  <NavLink key={product.id} to={`/product/${product.id}`}>
+                    <OrderItem key={product.id} product={product} />
+                  </NavLink>
+                );
               })}
             </Card>
-            <br />
-            <br />
-          </>
-        );
-      })}
+          );
+        })}
+      </Stack>
     </>
   );
 }

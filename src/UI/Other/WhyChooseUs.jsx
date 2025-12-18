@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Stack, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Divider, Stack, Typography } from "@mui/material";
 
 export default function WhyChooseUs() {
   const data = [
@@ -34,6 +34,17 @@ export default function WhyChooseUs() {
       >
         <Typography variant="h2" fontWeight={800} sx={{ mt: 5 }}>
           Why Choose Us ?
+            <Divider
+                        variant="middle"
+                        sx={{
+                          borderColor: "primary.main",
+                          borderBottomWidth: 4,
+                          borderRadius: 1,
+                          width: { xs: "35%", sm: "15%", md: "10%", lg: "10%" ,xl:'10%'},
+                          justifySelf: "center",
+                          mt: 0.5,
+                        }}
+                      />
         </Typography>
         <Stack
           direction={{ sm: "column", md: "row" }}

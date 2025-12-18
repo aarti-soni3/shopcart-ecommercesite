@@ -6,7 +6,6 @@ import { Route, Routes } from "react-router-dom";
 import CartPage from "./UI/Cart/CartPage";
 import ProfilePage from "./UI/User/ProfilePage";
 import Navbar from "./UI/Navigation/Navbar.jsx";
-import Contact from "./UI/Other/Contact.jsx";
 import Products from "./UI/Product/Products.jsx";
 import ProductCardDetail from "./UI/Product/ProductCardDetail.jsx";
 import ProductByCategory from "./UI/Product/ProductByCategory.jsx";
@@ -18,6 +17,8 @@ import OrderFailedPage from "./UI/Order/OrderFailedPage.jsx";
 import PageNotFound from "./UI/Other/PageNotFound.jsx";
 import Home from "./UI/Other/Home.jsx";
 import ProductsByDiscount from "./UI/Product/productsByDiscount.jsx";
+import Footer from "./UI/Other/Footer.jsx";
+import Contact from "./UI/Contact/Contact.jsx";
 
 function App() {
   return (
@@ -52,6 +53,8 @@ function App() {
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+
+      <Footer/>
     </>
   );
 }

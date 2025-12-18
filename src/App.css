@@ -24,7 +24,7 @@
   padding-left: 0 !important;
   padding-right: 0 !important;
   /* If the Hero should also be full width, you might need to adjust margin/width */
-  width: 100vw;
+  width: 100%;
   max-width: none;
   /* Adjust margin if necessary to counteract the root container's margin */
   margin-left: calc(50% - 50vw) !important;

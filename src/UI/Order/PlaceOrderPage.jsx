@@ -18,7 +18,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formValidationSchema } from "../../utils/validationSchema";
 import { useNavigate } from "react-router-dom";
-import RazorpayButton from "../Other/RazorpayButton";
+import RazorpayButton from "./RazorpayButton";
 
 export default function PlaceOrderPage() {
   const { cart, loading, error, clearUserCart } = useContext(CartContext);

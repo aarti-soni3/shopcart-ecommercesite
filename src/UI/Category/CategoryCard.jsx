@@ -13,10 +13,8 @@ function CategoryCard({ category }) {
           sx={{
             display: "flex",
             flexDirection: { xs: "row", sm: "column" },
-            minHeight: { xs: 100, sm: 210 },
-            maxHeight: { xs: 120, sm: 250 },
-            minWidth: { xs: 250, sm: 150 },
-            maxWidth: { xs: 280, sm: 180 },
+            Height: { xs: 100, sm: 210 },
+            Width: { xs: 250, sm: 150 },
           }}
         >
           <CardMedia
@@ -36,7 +34,7 @@ function CategoryCard({ category }) {
                 variant="h6"
                 fontSize={{ xs: 15, sm: 18, md: 20 }}
                 >
-                {trimSentence(category.name, 20)}
+                {trimSentence(category.name,15)}
               </Typography>
               <Typography
                 variant="subtitle2"

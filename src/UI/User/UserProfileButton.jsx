@@ -58,7 +58,9 @@ export default function AccountMenu() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}>
+                <Avatar
+                  sx={{ width: 32, height: 32, textTransform: "uppercase" }}
+                >
                   {currentUserData?.firstName.slice(0, 1)}
                 </Avatar>
               </IconButton>
@@ -133,7 +135,7 @@ export default function AccountMenu() {
         </>
       ) : (
         <>
-          <Stack gap={1} direction={"row"} sx={{ m: '15px' ,mb:1 }}>
+          <Stack gap={1} direction={"row"} sx={{ m: "15px", mb: 1 }}>
             <IconButton size="large" sx={{ p: 0 }}>
               <Avatar>{currentUserData?.firstName.slice(0, 1)}</Avatar>
             </IconButton>
