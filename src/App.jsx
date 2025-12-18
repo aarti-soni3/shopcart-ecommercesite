@@ -16,7 +16,7 @@ import OrderHistoryPage from "./UI/Order/OrderHistoryPage.jsx";
 import OrderFailedPage from "./UI/Order/OrderFailedPage.jsx";
 import PageNotFound from "./UI/Other/PageNotFound.jsx";
 import Home from "./UI/Other/Home.jsx";
-import ProductsByDiscount from "./UI/Product/productsByDiscount.jsx";
+import ProductsByDiscount from "./UI/Product/ProductsByDiscount.jsx";
 import Footer from "./UI/Other/Footer.jsx";
 import Contact from "./UI/Contact/Contact.jsx";
 
@@ -46,15 +46,12 @@ function App() {
             </FilterProductProvider>
           }
         />
-        <Route
-          path="/product/category/:id"
-          element={<ProductByCategory />}
-        />
+        <Route path="/product/category/:id" element={<ProductByCategory />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
