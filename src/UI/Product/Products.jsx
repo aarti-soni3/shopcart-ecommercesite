@@ -27,7 +27,7 @@ function Products() {
     <>
       <Stack
         gap={4}
-        sx={{ display: "flex", width: "100%  ", height: "100vh", p: 2 }}
+        sx={{ width: "100%  ", height: "100vh", mt: 10 }}
       >
         <FilterProductSection />
         <Box sx={{ flexGrow: 1, width: "100%", minHeight: 0 }}>

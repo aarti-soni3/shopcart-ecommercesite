@@ -65,12 +65,12 @@ export default function HamburgerMenuButton() {
           gap={2}
           justifyContent={"space-between"}
           flexGrow={1}
-          sx={{ minWidth: "225px" }}
+          sx={{ minWidth: "225px",maxHeight:'100vh' }}
         >
           <Stack gap={1} spacing={1} fontSize={20} sx={{ ml: 3, mt: 4 }}>
             <Box display={"flex"} flexDirection={"row"} gap={1} sx={boxStyle}>
               <HomeOutlinedIcon sx={menuStyle("/")} />
-              <NavigationLink to="/" label="Home"/>
+              <NavigationLink to="/" label="Home" />
             </Box>
             <Box display={"flex"} flexDirection={"row"} gap={1} sx={boxStyle}>
               <StorefrontOutlinedIcon sx={menuStyle("/product")} />

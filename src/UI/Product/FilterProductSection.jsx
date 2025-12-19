@@ -12,7 +12,12 @@ function FilterProductSection() {
 
   return (
     <>
-      <Stack gap={2} direction={"row-reverse"}>
+      <Stack
+        gap={2}
+        direction={"row-reverse"}
+        justifyContent={{ xs: "center", sm: "right" }}
+        sx={{ mr: { xs: 0, sm: 12, md: 15, lg: 10, xl: 12 } }}
+      >
         <Box>
           <Select
             labelId="price-filter-label"

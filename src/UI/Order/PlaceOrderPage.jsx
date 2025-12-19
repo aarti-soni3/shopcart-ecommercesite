@@ -23,7 +23,7 @@ import { formValidationSchema } from "../../utils/validationSchema";
 import { NavLink, useNavigate } from "react-router-dom";
 import RazorpayButton from "./RazorpayButton";
 import { twoDecimalValue } from "../../utils/math";
-
+import { CartEmptyPage } from "../Cart/CartEmptyPage";
 export default function PlaceOrderPage() {
   const { cart, loading, error, clearUserCart, getCartItemCount } =
     useContext(CartContext);
@@ -121,7 +121,7 @@ export default function PlaceOrderPage() {
   }
 
   if (!cart) {
-    return <> Cart is Empty....</>;
+    return <CartEmptyPage />;
   }
 
   if (error) {

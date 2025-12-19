@@ -11,6 +11,7 @@ export default function Footer() {
           mt: 4,
           p: 4,
           backgroundColor: "primary.contrastText",
+          // position: "fixed",
         }}
       >
         <Stack

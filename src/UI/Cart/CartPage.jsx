@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import CartItem from "./CartItem";
 import { CartContext } from "../../Context Provider/CreateContext";
 import { twoDecimalValue } from "../../utils/math";
-
+import { CartEmptyPage } from "./CartEmptyPage";
 export default function CartPage() {
   const { cart, loading, error, clearUserCart, getCartItemCount } =
     useContext(CartContext);
@@ -22,26 +22,7 @@ export default function CartPage() {
   }
 
   if (!cart) {
-    return (
-      <>
-        <Stack sx={{mb:10}}>
-          <CardMedia
-            component="img"
-            alt="product image"
-            image={"/cartempty.png"}
-            sx={{
-              width: 500,
-              height: 500,
-              objectFit: "contain",
-              alignSelf:'center'
-            }}
-          />
-          <Typography fontWeight={600} variant="h2">
-            Cart is empty...
-          </Typography>
-        </Stack>
-      </>
-    );
+    return <CartEmptyPage />;
   }
 
   if (error) {

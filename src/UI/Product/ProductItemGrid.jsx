@@ -5,7 +5,6 @@ import { Grid, AutoSizer } from "react-virtualized";
 import "react-virtualized/styles.css";
 
 function ProductItemGrid({ products, renderCard, getLinkPath }) {
-  // console.log(products);
   const productsArray = useMemo(() => {
     return Array.isArray(products) ? products : Object.values(products);
   }, [products]);
@@ -33,27 +32,22 @@ function ProductItemGrid({ products, renderCard, getLinkPath }) {
     const product = productsArray[index];
     const id = product.id || index;
 
-    // console.log(
-    //   containerWidth,
-    //   columnCount,
-    //   index,
-    //   rowIndex,
-    //   columnIndex,
-    //   key,
-    //   style
-    // );
-
     return (
-      // <div key={key} style={style}>
       <div key={key} style={{ ...style, padding: "8px" }}>
         <NavLink to={getLinkPath(id)}>{renderCard(product)}</NavLink>
       </div>
-      // </div>
     );
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: "100%", height: "100%", display: "flex" }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        width: "100%",
+        height: "100%",
+        display: "flex",
+      }}
+    >
       <AutoSizer>
         {({ width, height }) => {
           // console.log(width);
@@ -66,6 +60,7 @@ function ProductItemGrid({ products, renderCard, getLinkPath }) {
 
           return (
             <Grid
+            style={{justifyItems:'center'}}
               cellRenderer={cellRenderer}
               columnCount={columnCount}
               columnWidth={cardWidth}

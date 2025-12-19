@@ -1,7 +1,7 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 export default function OrderFailedPage() {
   const navigate = useNavigate();
 
@@ -15,16 +15,21 @@ export default function OrderFailedPage() {
       textAlign="center"
       p={3}
     >
-      <CheckCircleIcon color="error" sx={{ fontSize: 80, mb: 2 }} />
+      <CancelOutlinedIcon color="error" sx={{ fontSize: 80, mb: 2 }} />
       <Typography variant="h3" gutterBottom>
         Order Failed!
       </Typography>
       <Typography variant="body1" color="text.secondary" mb={3}>
         Try again...
       </Typography>
-      <Button variant="contained" onClick={() => navigate("/")}>
-        Continue Shopping
-      </Button>
+      <Stack gap={2} display={"flex"} flexDirection={"row"}>
+        <Button variant="contained" onClick={() => navigate("/cart")}>
+          Retry payment
+        </Button>
+        <Button variant="outlined" onClick={() => navigate("/product")}>
+          Continue shopping
+        </Button>
+      </Stack>
     </Box>
   );
 }
