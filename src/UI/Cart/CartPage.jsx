@@ -21,7 +21,7 @@ export default function CartPage() {
     return <>Loading...</>;
   }
 
-  if (!cart) {
+  if (!cart || !cart.products) {
     return <CartEmptyPage />;
   }
 
@@ -50,7 +50,7 @@ export default function CartPage() {
           </Button>
         </Stack>
         <Divider variant="middle" />
-        {Object.values(cart.products).map((product) => {
+        {Object.values(cart?.products).map((product) => {
           return (
             <NavLink key={product.id} to={`/product/${product.id}`}>
               <CartItem key={product.id} product={product} />
