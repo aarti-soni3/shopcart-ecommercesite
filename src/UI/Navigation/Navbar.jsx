@@ -17,8 +17,8 @@ import { useContext } from "react";
 import { CartContext } from "../../Context Provider/CreateContext";
 import NavigationLink from "./NavigationLink";
 import HamburgerMenuButton from "./HamBurgerMenuButton";
-import Logo from "../Logo";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Logo from "./Logo";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",

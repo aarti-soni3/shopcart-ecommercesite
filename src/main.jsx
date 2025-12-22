@@ -8,12 +8,14 @@ import { AuthProvider } from "./Firebase/Database/Auth/AuthProvider.jsx";
 import CartProvider from "./Firebase/Database/Cart/CartProvider.jsx";
 import ProductProvider from "./Firebase/Database/Product/ProductProvider.jsx";
 import OrderProvider from "./Firebase/Database/Order/OrderProvider.jsx";
+import FeedbackProvider from "./Context Provider/FeedbackProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <CustomThemeProvider>
-        <AuthProvider>
+        <FeedbackProvider>
+          <AuthProvider>
             <CartProvider>
               <OrderProvider>
                 <ProductProvider>
@@ -21,7 +23,8 @@ createRoot(document.getElementById("root")).render(
                 </ProductProvider>
               </OrderProvider>
             </CartProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </FeedbackProvider>
       </CustomThemeProvider>
     </BrowserRouter>
   </StrictMode>

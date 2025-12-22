@@ -11,11 +11,15 @@ import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { trimSentence } from "../../utils/string";
 import { twoDecimalValue } from "../../utils/math";
-import { CartContext } from "../../Context Provider/CreateContext";
+import {
+  CartContext,
+  FeedbackContext,
+} from "../../Context Provider/CreateContext";
 
 export default function CartItem({ product }) {
   const { removeFromCart, updateProductQuantity } = useContext(CartContext);
   const [isAdding, setIsAdding] = useState(false);
+  const { showSuccessFeedback } = useContext(FeedbackContext);
 
   const handleOnAddButtonClick = async (event) => {
     event.stopPropagation();
@@ -37,6 +41,7 @@ export default function CartItem({ product }) {
 
     try {
       setIsAdding(true);
+      product.quantity <= 1 ? showSuccessFeedback("Product Removed!") : "";
       await updateProductQuantity(product.id, -1);
     } catch (error) {
       throw new Error(error);
@@ -162,6 +167,7 @@ export default function CartItem({ product }) {
               event.stopPropagation();
               event.preventDefault();
               removeFromCart(product.id);
+              showSuccessFeedback("Product Removed !");
             }}
             sx={{ p: 1, mt: 1 }}
           >

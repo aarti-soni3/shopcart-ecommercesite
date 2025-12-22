@@ -8,7 +8,10 @@ import { discountPriceFromPercentage } from "../../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { IconButton } from "@mui/material";
 import { memo, useContext, useState } from "react";
-import { CartContext } from "../../Context Provider/CreateContext";
+import {
+  CartContext,
+  FeedbackContext,
+} from "../../Context Provider/CreateContext";
 
 function ProductCard({ product }) {
   const {
@@ -20,6 +23,7 @@ function ProductCard({ product }) {
 
   const [isAdding, setIsAdding] = useState(false);
   const inCart = isProductInCart(product.id);
+  const { showSuccessFeedback, showFeedback } = useContext(FeedbackContext);
 
   const handleOnCartClick = async (event) => {
     event.stopPropagation();
@@ -30,8 +34,10 @@ function ProductCard({ product }) {
 
       if (inCart) {
         await updateProductQuantity(product.id, 1);
+        showFeedback("Product Quantity Updated !");
       } else {
         await addToCart(product, 1);
+        showSuccessFeedback("Product Added !");
       }
     } catch (error) {
       console.log("can't add product to cart", error);

@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context Provider/CreateContext";
-import { debounceFunction } from "../../utils/debounceFunction";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
@@ -28,7 +27,7 @@ export default function SignUpPage() {
     useContext(AuthContext);
 
   const handleOnSubmit = () => {
-    debounceFunction(SignupUserWithEmailAndPassword(formData));
+    SignupUserWithEmailAndPassword(formData);
   };
 
   const handleOnValueChange = (event) => {

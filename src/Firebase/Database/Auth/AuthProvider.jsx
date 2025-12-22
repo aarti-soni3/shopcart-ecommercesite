@@ -4,15 +4,20 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../Context Provider/CreateContext";
+import {
+  AuthContext,
+  FeedbackContext,
+} from "../../../Context Provider/CreateContext";
 import { auth } from "../../firebaseConfig";
 import { getUserDataByUID, writeUserDataByUID } from "../Users/userService";
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserData, setCurrentUserData] = useState(null);
+  const { showSuccessFeedback, showErrorFeedback, showFeedback } =
+    useContext(FeedbackContext);
 
   const [signUpData, setSignUpData] = useState({
     isSignupLoading: false,
@@ -32,7 +37,6 @@ export const AuthProvider = ({ children }) => {
 
       try {
         const userData = await getUserDataByUID(uid);
-        console.log(userData);
         setCurrentUserData(userData);
         return userData;
       } catch (error) {
@@ -45,13 +49,12 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setCurrentUser(user);
         getUserDataByID();
-        console.log("you are logged in !");
+        // showSuccessFeedback("you are logged in !");
       } else {
         setCurrentUser(null);
-        console.log("you are logged out !");
       }
     });
-  }, [currentUser]);
+  }, [currentUser, showFeedback, showSuccessFeedback]);
 
   const SignupUserWithEmailAndPassword = async (data) => {
     const email = data.email;
@@ -69,6 +72,8 @@ export const AuthProvider = ({ children }) => {
         isSignUpError: true,
         signUpErrorMessage: "Email and password fields are required.",
       });
+
+      showErrorFeedback("Email and password fields are required.");
       return;
     }
 
@@ -80,16 +85,17 @@ export const AuthProvider = ({ children }) => {
       );
       const user = userCredential.user;
       await writeUserDataByUID(user.uid, data);
+      showSuccessFeedback("Account Created!");
       navigate("/");
       setSignUpData({
         ...loginData,
         isSignUpError: false,
         signUpErrorMessage: "",
       });
-      console.log("sign up user : ", user);
     } catch (error) {
       const errorCode = error.code;
       let errorMsg = getErrorMessage(errorCode);
+      showErrorFeedback(errorMsg);
 
       setSignUpData((prevData) => ({
         ...prevData,
@@ -117,6 +123,7 @@ export const AuthProvider = ({ children }) => {
         password
       );
       const user = userCredential.user;
+      showSuccessFeedback("You're logged in!");
       navigate("/");
       setLoginData({
         ...loginData,
@@ -127,7 +134,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       const errorCode = error.code;
       let errorMsg = getErrorMessage(errorCode);
-
+      showErrorFeedback(errorMsg);
       setLoginData((prevLoginData) => ({
         ...prevLoginData,
         isLoginError: true,
@@ -186,6 +193,7 @@ export const AuthProvider = ({ children }) => {
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
+        showFeedback("you are logged out !");
         console.log("user logged out !");
       })
       .catch((error) => {
