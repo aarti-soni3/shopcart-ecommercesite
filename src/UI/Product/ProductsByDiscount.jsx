@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import ProductItemGrid from "./ProductItemGrid";
 import ProductCard from "./ProductCard";
 import { Box } from "@mui/material";
+import ProductSkeletonCardGrid from "./ProductSkeletonCardGrid";
 
 export default function ProductsByDiscount() {
   const [categoryProducts, setCategoryProducts] = useState([]);
@@ -19,7 +20,7 @@ export default function ProductsByDiscount() {
     getCategoryProductData();
   }, [getProductsByDiscountedPercentage]);
 
-  if (loading) return <>Loading Data...</>;
+  // if (loading) return <>Loading Data...</>;
   if (error) return <> Something went wrong...</>;
 
   const renderCard = (product) => {
@@ -31,12 +32,16 @@ export default function ProductsByDiscount() {
   };
 
   return (
-    <Box sx={{ display: "flex", width: "100%", height: "100vh", p: 2 }}>
-      <ProductItemGrid
-        products={categoryProducts}
-        renderCard={renderCard}
-        getLinkPath={getLinkPath}
-      />
+    <Box sx={{ display: "flex", width: "100%", height: "100vh", p: 2, mt: 10 }}>
+      {loading ? (
+        <ProductSkeletonCardGrid />
+      ) : (
+        <ProductItemGrid
+          products={categoryProducts}
+          renderCard={renderCard}
+          getLinkPath={getLinkPath}
+        />
+      )}
     </Box>
   );
 }

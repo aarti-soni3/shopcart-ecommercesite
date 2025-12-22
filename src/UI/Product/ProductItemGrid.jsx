@@ -9,9 +9,9 @@ function ProductItemGrid({ products, renderCard, getLinkPath }) {
     return Array.isArray(products) ? products : Object.values(products);
   }, [products]);
 
-  if (!productsArray || productsArray.length === 0) {
-    return <Box>No products available</Box>;
-  }
+  // if (!productsArray || productsArray.length === 0) {
+  //   return <Box>No products available</Box>;
+  // }
 
   const cardWidth = 230;
   const cardHeight = 370;
@@ -60,7 +60,7 @@ function ProductItemGrid({ products, renderCard, getLinkPath }) {
 
           return (
             <Grid
-            style={{justifyItems:'center'}}
+              style={{ justifyItems: "center" }}
               cellRenderer={cellRenderer}
               columnCount={columnCount}
               columnWidth={cardWidth}

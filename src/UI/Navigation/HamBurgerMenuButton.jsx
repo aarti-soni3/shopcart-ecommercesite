@@ -4,7 +4,6 @@ import {
   Divider,
   Drawer,
   IconButton,
-  MenuItem,
   Stack,
   Typography,
   useTheme,
@@ -19,7 +18,7 @@ import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context Provider/CreateContext";
 
 export default function HamburgerMenuButton() {
@@ -27,6 +26,7 @@ export default function HamburgerMenuButton() {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -65,7 +65,7 @@ export default function HamburgerMenuButton() {
           gap={2}
           justifyContent={"space-between"}
           flexGrow={1}
-          sx={{ minWidth: "225px",maxHeight:'100vh' }}
+          sx={{ minWidth: "225px", maxHeight: "100vh" }}
         >
           <Stack gap={1} spacing={1} fontSize={20} sx={{ ml: 3, mt: 4 }}>
             <Box display={"flex"} flexDirection={"row"} gap={1} sx={boxStyle}>
@@ -120,7 +120,29 @@ export default function HamburgerMenuButton() {
               </Button>
             </Stack>
           ) : (
-            <></>
+            <>
+              <Stack gap={0.5} sx={{ p: 2, pb: 4 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  Log in
+                </Button>
+                <Stack direction={"row"} justifyContent={"center"}>
+                  <Typography variant="subtitle1">New User?</Typography>
+                  <Button
+                    onClick={() => {
+                      navigate("/signup");
+                    }}
+                    sx={{ pt: 0, pb: 0 }}
+                  >
+                    Start here
+                  </Button>
+                </Stack>
+              </Stack>
+            </>
           )}
         </Stack>
       </Drawer>
