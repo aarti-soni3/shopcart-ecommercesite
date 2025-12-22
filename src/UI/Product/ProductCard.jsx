@@ -23,7 +23,7 @@ function ProductCard({ product }) {
 
   const [isAdding, setIsAdding] = useState(false);
   const inCart = isProductInCart(product.id);
-  const { showSuccessFeedback, showFeedback } = useContext(FeedbackContext);
+  const { showSuccessFeedback, showInfoFeedback,showFeedback } = useContext(FeedbackContext);
 
   const handleOnCartClick = async (event) => {
     event.stopPropagation();
@@ -41,7 +41,7 @@ function ProductCard({ product }) {
       }
     } catch (error) {
       console.log("can't add product to cart", error);
-      throw new Error(error);
+      showInfoFeedback("Login for add to cart !");
     } finally {
       setIsAdding(false);
     }

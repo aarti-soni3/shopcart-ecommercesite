@@ -65,7 +65,7 @@ export const AddProductToCartData = async (userID, product, quantity) => {
 
 export const updateQuantity = async (userID, productID, quantity) => {
   try {
-    const currentCart = await GetUserCartByID(userID);
+    let currentCart = await GetUserCartByID(userID);
 
     if (currentCart) {
       // console.log(currentCart);
@@ -81,6 +81,8 @@ export const updateQuantity = async (userID, productID, quantity) => {
         if (product.quantity <= 0) {
           console.log("delete prod");
           delete currentCart.products[productID];
+
+          if (currentCart.products.length <= 0) currentCart = null;
         } else {
           const updatedProduct = getSingleProductCartData(
             product,

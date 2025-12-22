@@ -14,6 +14,7 @@ import {
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import {
   CartContext,
+  FeedbackContext,
   ProductContext,
 } from "../../Context Provider/CreateContext";
 import { discountPriceFromPercentage } from "../../utils/math";
@@ -24,6 +25,8 @@ function ProductCardDetail() {
   const [product, setProduct] = useState({});
   const [image, setImage] = useState(0);
   const [rating, setRating] = useState(0);
+  const { showFeedback, showSuccessFeedback, showInfoFeedback } =
+    useContext(FeedbackContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -51,12 +54,14 @@ function ProductCardDetail() {
 
       if (inCart) {
         await updateProductQuantity(id, 1);
+        showFeedback("Product Quantity Updated !");
       } else {
         await addToCart(product, 1);
+        showSuccessFeedback("Product Added !");
       }
     } catch (error) {
       console.log("can't add product to cart", error);
-      throw new Error(error);
+      showInfoFeedback("Login for add to cart !");
     } finally {
       setIsAdding(false);
     }
@@ -202,7 +207,7 @@ function ProductCardDetail() {
                     &#8722;{product?.discountPercentage}&#37;
                   </Typography>
                 </Stack>
-                 <Button
+                <Button
                   variant="contained"
                   sx={{ mt: 2, zIndex: 5 }}
                   onClick={handleOnCartClick}
@@ -232,7 +237,6 @@ function ProductCardDetail() {
                 >
                   <b>About the product :</b> <br /> {product?.description}
                 </Typography>
-               
               </Stack>
             </Stack>
           </Stack>

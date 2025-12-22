@@ -5,27 +5,22 @@ function FeedbackProviderContent({ children }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const showFeedback = (message) => {
-    console.log(message);
     enqueueSnackbar(message, { variant: "default" });
   };
 
   const showSuccessFeedback = (message) => {
-    console.log(message);
     enqueueSnackbar(message, { variant: "success" });
   };
 
   const showErrorFeedback = (message) => {
-    console.log(message);
     enqueueSnackbar(message, { variant: "error" });
   };
 
   const showInfoFeedback = (message) => {
-    console.log(message);
     enqueueSnackbar(message, { variant: "info" });
   };
 
   const showWarningFeedback = (message) => {
-    console.log(message);
     enqueueSnackbar(message, { variant: "warning" });
   };
 
