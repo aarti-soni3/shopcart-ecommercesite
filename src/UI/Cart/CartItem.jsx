@@ -15,6 +15,7 @@ import {
   CartContext,
   FeedbackContext,
 } from "../../Context Provider/CreateContext";
+import { animations } from "../../utils/animations";
 
 export default function CartItem({ product }) {
   const { removeFromCart, updateProductQuantity } = useContext(CartContext);
@@ -53,17 +54,23 @@ export default function CartItem({ product }) {
   return (
     <Card sx={{ m: 4, display: "flex" }}>
       <Stack justifyContent={"flex-start"}>
+          <Box sx={{ backgroundColor: "#e8e8e8ff" }}>
+
         <CardMedia
           component="img"
           alt="product image"
           image={product?.thumbnail}
           sx={{
+            ...animations.zoomOut,
             width: 200,
             height: 200,
             objectFit: "contain",
-            backgroundColor: "#e8e8e8ff",
+            "&:hover": {
+              ...animations.zoomIn,
+            },
           }}
-        />
+          />
+          </Box>
       </Stack>
       <Stack direction={"row"} sx={{ m: 2 }}>
         <Stack>

@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { trimSentence } from "../../utils/string";
-import { Rating, Stack } from "@mui/material";
+import { Box, Rating, Stack } from "@mui/material";
 import { discountPriceFromPercentage } from "../../utils/math";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { IconButton } from "@mui/material";
@@ -12,6 +12,7 @@ import {
   CartContext,
   FeedbackContext,
 } from "../../Context Provider/CreateContext";
+import { animations } from "../../utils/animations";
 
 function ProductCard({ product }) {
   const {
@@ -23,7 +24,8 @@ function ProductCard({ product }) {
 
   const [isAdding, setIsAdding] = useState(false);
   const inCart = isProductInCart(product.id);
-  const { showSuccessFeedback, showInfoFeedback,showFeedback } = useContext(FeedbackContext);
+  const { showSuccessFeedback, showInfoFeedback, showFeedback } =
+    useContext(FeedbackContext);
 
   const handleOnCartClick = async (event) => {
     event.stopPropagation();
@@ -52,13 +54,21 @@ function ProductCard({ product }) {
       <Card
         sx={{ minWidth: 210, maxWidth: 210, minHeight: 350, maxHeight: 350 }}
       >
-        <CardMedia
-          component="img"
-          alt="product image"
-          height="190"
-          image={product?.thumbnail}
-          sx={{ objectFit: "contain", backgroundColor: "#e8e8e8ff" }}
-        />
+        <Box sx={{ backgroundColor: "#e8e8e8ff" }}>
+          <CardMedia
+            component="img"
+            alt="product image"
+            height="190"
+            image={product?.thumbnail}
+            sx={{
+              ...animations.zoomOut,
+              objectFit: "contain",
+              "&:hover": {
+                ...animations.zoomIn,
+              },
+            }}
+          />
+        </Box>
 
         <CardContent
           sx={{
