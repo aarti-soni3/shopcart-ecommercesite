@@ -306,7 +306,7 @@ export default function PlaceOrderPage() {
                   Grand Total {"(" + getCartItemCount() + " items)"}:{" "}
                 </Typography>
                 <Typography variant="subtitle1">
-                  &#8377; {twoDecimalValue(cart.discountedTotal)}
+                  &#36; {twoDecimalValue(cart.discountedTotal)}
                 </Typography>
               </Stack>
 

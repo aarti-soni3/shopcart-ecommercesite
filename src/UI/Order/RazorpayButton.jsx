@@ -32,7 +32,7 @@ export default function RazorpayButton({
       // Create Razorpay options
       const options = createRazorPayOptions({
         amount: amount,
-        currency: "INR",
+        currency: "USD",
         name: "Shopcart - Ecommerce Website",
         description: "Order Payment",
         userDetails: userDetails,
