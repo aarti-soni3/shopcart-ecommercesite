@@ -69,7 +69,7 @@ export default function CartPage() {
               Grand Total {"(" + getCartItemCount() + " items)"}:{" "}
             </Typography>
             <Typography variant="subtitle1" sx={{ ml: 2 }}>
-              &#8377; {twoDecimalValue(cart.discountedTotal)}
+              &#36; {twoDecimalValue(cart.discountedTotal)}
             </Typography>
           </Box>
           <NavLink to="/placeorder">

@@ -20,7 +20,7 @@ const convertToPaise = (amount) => {
 //TODO: used
 export const createRazorPayOptions = ({
   amount,
-  currency = "INR",
+  currency = "USD",
   name = "ShopCart - Ecommerce Website",
   description = "Shopping Products",
   userDetails,
